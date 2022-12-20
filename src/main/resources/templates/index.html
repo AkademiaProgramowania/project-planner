@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+Home
+<div><a href="/add-task">Add Task</a></div>
+
+<div th:each="task:${tasks}">
+    <a th:href="@{'/task-details/' + ${task.id}}"><div th:text="'Task name: ' + ${task.name} + ', Status: ' + ${task.status}"></div></a>
+</div>
+
+
+</body>
+</html>

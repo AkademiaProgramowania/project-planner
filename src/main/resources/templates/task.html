@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create task</title>
+</head>
+<body>
+
+<div th:text="${fieldsNotFilledMessage}"></div>
+<div th:text="${invalidDateMessage}"></div>
+
+<form action="/add-task" method="post">
+    Add Task
+    <div>
+        <label for="name">Task name</label>
+        <input th:field="${taskRequest.name}" id="name" placeholder="Text">
+    </div>
+    <div>
+        Status:
+        <select th:field="${taskRequest.status}">
+            <option value="To do">To Do</option>
+            <option value="In Review">In Review</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+        </select>
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <input th:field="${taskRequest.description}" id="description">
+    </div>
+    <div>
+        <label for="deadline">Deadline</label>
+        <input th:field="${taskRequest.deadline}" type="date" id="deadline">
+    </div>
+    <div>
+        <input type="submit" value="Create">
+    </div>
+</form>
+
+
+</body>
+</html>
