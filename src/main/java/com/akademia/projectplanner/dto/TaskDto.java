@@ -1,5 +1,4 @@
-package com.akademia.projectplanner.Dto;
-
+package com.akademia.projectplanner.dto;
 
 import lombok.Getter;
 import lombok.Setter;

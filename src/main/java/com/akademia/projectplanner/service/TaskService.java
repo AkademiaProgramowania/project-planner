@@ -1,9 +1,10 @@
 package com.akademia.projectplanner.service;
 
-import com.akademia.projectplanner.Dto.TaskDto;
+import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
-import com.akademia.projectplanner.model.Task;
+import com.akademia.projectplanner.entity.Task;
 import com.akademia.projectplanner.repository.TaskRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.DateTimeException;
@@ -11,14 +12,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class TaskService {
 
     private TaskRepository taskRepository;
-
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
 
     public void addTask(TaskDto taskDto) {
         if (checkMandatoryFields(taskDto.getName(), taskDto.getStatus())) {
@@ -45,6 +43,6 @@ public class TaskService {
 
     public Task getTaskInfo(Long taskId) {
         Optional<Task> taskOptional = taskRepository.findById(taskId);
-        return taskOptional.orElseThrow(() -> new TaskDoesNotExistException("Task does not exixsts!"));
+        return taskOptional.orElseThrow(() -> new TaskDoesNotExistException("Task does not exist!"));
     }
 }

@@ -1,10 +1,6 @@
-package com.akademia.projectplanner.model;
+package com.akademia.projectplanner.entity;
 
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,7 +21,6 @@ public class Task {
     private String description;
     private LocalDate startDate;
     private String deadline;
-
 
     public Task(String name, String status, String description, String deadline) {
         this.name = name;
