@@ -1,17 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Project Planner</title>
 </head>
+
 <body>
-Home
-<div><a href="/add-task">Add Task</a></div>
-
-<div th:each="task:${tasks}">
-    <a th:href="@{'/task-details/' + ${task.id}}"><div th:text="'Task name: ' + ${task.name} + ', Status: ' + ${task.status}"></div></a>
+<header>
+    <nav>
+        <ul class="navbar_links">
+            <li class="logo">LOGO</li>
+            <li><a href="">Home</a></li>
+            <li><a href="/add-task">Add task</a></li>
+        </ul>
+    </nav>
+    <a href=""><button>Sign in</button></a>
+</header>
+<div class="status-cards">
+    <div class="task-list-todo">
+        <h1 class="list-title-todo">To do</h1>
+        <ul class="list-items-todo">
+            <li>Very long task to see if it fits or not very long task description</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+            <li>Test task</li>
+        </ul>
+    </div>
+    <div class="task-list-inprogress">
+        <h1 class="list-title-inprogress">In progress</h1>
+        <ul class="list-items-inprogress">
+            <li>Test task</li>
+            <li>Test task</li>
+        </ul>
+    </div>
+    <div class="task-list-inreview">
+        <h1 class="list-title-inreview">In review</h1>
+        <ul class="list-items-inreview">
+            <li>Test task</li>
+            <li>Test task</li>
+        </ul>
+    </div>
+    <div class="task-list-done">
+        <h1 class="list-title-done">Done</h1>
+        <ul class="list-items-done">
+            <li>Test task</li>
+            <li>Test task</li>
+        </ul>
+    </div>
 </div>
-
-
 </body>
+
 </html>
