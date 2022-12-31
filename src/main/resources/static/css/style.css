@@ -1,0 +1,225 @@
+
+* {
+    background-color:#ebe8e9;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+}
+
+li, a, button {
+    font-weight: 100;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+nav li {
+    border-left: solid black 1px;
+}
+
+header {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin: 30px 0 0 0;
+}
+
+.logo{
+    cursor: pointer;
+}
+
+.navbar_links {
+    list-style: none;
+}
+
+.navbar_links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.navbar_links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.navbar_links li a:hover {
+    color:#BFA181;
+}
+
+button {
+    padding: 10px 25px;
+    background-color: rgba(191, 161, 129, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin: 20px 0 0 0;
+}
+
+button:hover{
+    background-color: rgba(191, 161, 129, 0.8);
+}
+
+.status-cards {
+    display: flex;
+    justify-content:space-evenly;
+    margin: 60px 0 0 0;
+}
+.status-cards h1 {
+    text-align: center;
+}
+
+.status-cards li {
+    font-size: 20px;
+    background-color: #fff;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.status-cards li:hover {
+    background-color: rgb(252, 197, 135);
+}
+
+.task-list-todo {
+    flex-direction: column;
+    background-color: rgb(117,70,74);
+    height: fit-content;
+    width: 500px;
+    border-radius: 5px;
+    margin: 0px 0px 0 40px;
+}
+
+.list-title-todo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    background-color: rgb(117,70,74);
+    padding: 1rem;
+}
+
+.list-items-todo {
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    padding: 0 0.6rem 0.5rem;
+    list-style: none;
+    background-color: rgb(117,70,74);
+}
+
+.list-items-todo li {
+    background-color: #fff;
+    font-size: 20px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.task-list-inprogress {
+    flex-direction: column;
+    background-color: rgba(170,124,122);
+    height: fit-content;
+    width: 500px;
+    border-radius: 5px;
+    margin: 0px 0px 0 20px;
+}
+
+.list-title-inprogress{
+    font-size: 1.4rem;
+    font-weight: 700;
+    background-color: rgba(170,124,122);
+    padding: 1rem;
+}
+
+.list-items-inprogress {
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    padding: 0 0.6rem 0.5rem;
+    list-style: none;
+    background-color: rgba(170,124,122);
+}
+
+.list-items-inprogress li {
+    background-color: #fff;
+    font-size: 20px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+
+.task-list-inreview {
+    flex-direction: column;
+    background-color: rgba(190,171,167);
+    height: fit-content;
+    width: 500px;
+    border-radius: 5px;
+    margin: 0px 0px 0 20px;
+}
+
+.list-title-inreview{
+    font-size: 1.4rem;
+    font-weight: 700;
+    background-color: rgba(190,171,167);
+    padding: 1rem;
+}
+
+.list-items-inreview {
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    padding: 0 0.6rem 0.5rem;
+    list-style: none;
+    background-color: rgba(190,171,167);
+}
+
+.list-items-inreview li {
+    background-color: #fff;
+    font-size: 20px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+
+
+
+.task-list-done {
+    flex-direction: column;
+    background-color: rgba(232,219,212);
+    height: fit-content;
+    width: 500px;
+    border-radius: 5px;
+    margin: 0px 0px 0 20px;
+}
+
+.list-title-done {
+    font-size: 1.4rem;
+    font-weight: 700;
+    background-color: rgba(232,219,212);
+    padding: 1rem;
+}
+
+.list-items-done {
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    padding: 0 0.6rem 0.5rem;
+    list-style: none;
+    background-color: rgba(232,219,212, 1);
+}
+
+.list-items-done li {
+    background-color: #fff;
+    font-size: 20px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
