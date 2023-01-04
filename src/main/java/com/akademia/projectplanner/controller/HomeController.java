@@ -1,6 +1,6 @@
 package com.akademia.projectplanner.controller;
 
-import com.akademia.projectplanner.entity.Task;
+import com.akademia.projectplanner.entity.TaskEntity;
 import com.akademia.projectplanner.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,8 +16,8 @@ public class HomeController {
 
     @GetMapping("/")
     public String getMainPage(Model model) {
-        List<Task> tasks = taskService.getAllTasks();
-        model.addAttribute("tasks", tasks);
+        List<TaskEntity> taskEntities = taskService.getAllTasks();
+        model.addAttribute("tasks", taskEntities);
         return "index";
     }
 }
