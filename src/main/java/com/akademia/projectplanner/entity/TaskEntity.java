@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @ToString
 @Entity
 @Table(name = "tasks")
-public class Task {
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,10 @@ public class Task {
     private LocalDate startDate;
     private String deadline;
 
-    public Task(String name, String status, String description, String deadline) {
+    @ManyToOne(fetch = FetchType.EAGER)
+    private UserEntity user;
+
+    public TaskEntity(String name, String status, String description, String deadline) {
         this.name = name;
         this.status = status;
         this.description = description;

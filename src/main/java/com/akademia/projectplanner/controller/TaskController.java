@@ -2,7 +2,7 @@ package com.akademia.projectplanner.controller;
 
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
-import com.akademia.projectplanner.entity.Task;
+import com.akademia.projectplanner.entity.TaskEntity;
 import com.akademia.projectplanner.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -43,8 +43,8 @@ public class TaskController {
     @GetMapping("/task-details/{taskId}")
     public String getTaskDetailsPage(@PathVariable("taskId") Long taskId, Model model) {
         try {
-            Task task = taskService.getTaskInfo(taskId);
-            model.addAttribute("taskToView", task);
+            TaskEntity taskEntity = taskService.getTaskInfo(taskId);
+            model.addAttribute("taskToView", taskEntity);
         } catch (TaskDoesNotExistException e) {
             model.addAttribute("noTaskMessage", e.getMessage());
             return "task-details";
