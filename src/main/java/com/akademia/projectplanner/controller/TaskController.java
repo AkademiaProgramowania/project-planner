@@ -19,27 +19,6 @@ public class TaskController {
 
     private TaskService taskService;
 
-    @GetMapping("/add-task")
-    public String getAddTaskPage(Model model) {
-        TaskDto taskDto = new TaskDto();
-        model.addAttribute("taskRequest", taskDto);
-        return "task";
-    }
-
-    @PostMapping("/add-task")
-    public String processAddingTask(@ModelAttribute("taskRequest") TaskDto taskDto, Model model) {
-        try {
-            taskService.addTask(taskDto);
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("fieldsNotFilledMessage", e.getMessage());
-            return "task";
-        } catch (DateTimeException d) {
-            model.addAttribute("invalidDateMessage", d.getMessage());
-            return "task";
-        }
-        return "redirect:/";
-    }
-
     @GetMapping("/task-details/{taskId}")
     public String getTaskDetailsPage(@PathVariable("taskId") Long taskId, Model model) {
         try {
