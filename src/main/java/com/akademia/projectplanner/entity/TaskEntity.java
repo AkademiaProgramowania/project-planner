@@ -13,23 +13,24 @@ import java.time.LocalDate;
 @Table(name = "tasks")
 public class TaskEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String status;
-    private String description;
-    private LocalDate startDate;
-    private String deadline;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private UserEntity user;
+  private String name;
+  private String status;
+  private String description;
+  private LocalDate startDate;
+  private String deadline;
 
-    public TaskEntity(String name, String status, String description, String deadline) {
-        this.name = name;
-        this.status = status;
-        this.description = description;
-        this.deadline = deadline;
-        this.startDate = LocalDate.now();
-    }
+  @ManyToOne(fetch = FetchType.EAGER)
+  private UserEntity user;
+
+  public TaskEntity(String name, String status, String description, String deadline) {
+    this.name = name;
+    this.status = status;
+    this.description = description;
+    this.deadline = deadline;
+    this.startDate = LocalDate.now();
+  }
 }
