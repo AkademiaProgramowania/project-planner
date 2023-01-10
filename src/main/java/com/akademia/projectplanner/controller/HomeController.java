@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    private TaskService taskService;
+  private TaskService taskService;
 
     @GetMapping("/")
     public String getMainPage(Model model) {
