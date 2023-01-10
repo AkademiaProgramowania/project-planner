@@ -16,33 +16,38 @@ import java.util.Optional;
 @Service
 public class TaskService {
 
-    private TaskRepository taskRepository;
+  private TaskRepository taskRepository;
 
-    public void addTask(TaskDto taskDto) {
-        if (checkMandatoryFields(taskDto.getName(), taskDto.getStatus())) {
-            throw new IllegalArgumentException("Mandatory fields are not filled in!");
-        }
-        if (!checkIfDatesAreValid(taskDto.getDeadline())) {
-            throw new DateTimeException("Invalid date selected!");
-        }
-        TaskEntity taskEntity = new TaskEntity(taskDto.getName(), taskDto.getStatus(), taskDto.getDescription(), taskDto.getDeadline());
-        taskRepository.save(taskEntity);
+  public void addTask(TaskDto taskDto) {
+    if (checkMandatoryFields(taskDto.getName(), taskDto.getStatus())) {
+      throw new IllegalArgumentException("Mandatory fields are not filled in!");
     }
+    if (!checkIfDatesAreValid(taskDto.getDeadline())) {
+      throw new DateTimeException("Invalid date selected!");
+    }
+    TaskEntity taskEntity =
+        new TaskEntity(
+            taskDto.getName(),
+            taskDto.getStatus(),
+            taskDto.getDescription(),
+            taskDto.getDeadline());
+    taskRepository.save(taskEntity);
+  }
 
-    private boolean checkMandatoryFields(String name, String status) {
-        return name.isBlank() || status.isBlank();
-    }
+  private boolean checkMandatoryFields(String name, String status) {
+    return name.isBlank() || status.isBlank();
+  }
 
-    private boolean checkIfDatesAreValid(String deadline) {
-        return deadline.isBlank() || LocalDate.now().isBefore(LocalDate.parse(deadline));
-    }
+  private boolean checkIfDatesAreValid(String deadline) {
+    return deadline.isBlank() || LocalDate.now().isBefore(LocalDate.parse(deadline));
+  }
 
-    public List<TaskEntity> getAllTasks() {
-        return taskRepository.findAll();
-    }
+  public List<TaskEntity> getAllTasks() {
+    return taskRepository.findAll();
+  }
 
-    public TaskEntity getTaskInfo(Long taskId) {
-        Optional<TaskEntity> taskOptional = taskRepository.findById(taskId);
-        return taskOptional.orElseThrow(() -> new TaskDoesNotExistException("Task does not exist!"));
-    }
+  public TaskEntity getTaskInfo(Long taskId) {
+    Optional<TaskEntity> taskOptional = taskRepository.findById(taskId);
+    return taskOptional.orElseThrow(() -> new TaskDoesNotExistException("Task does not exist!"));
+  }
 }

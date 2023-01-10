@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 public class TaskDto {
 
-    private String name;
-    private String status;
-    private String description;
-    private String deadline;
+  private String name;
+  private String status;
+  private String description;
+  private String deadline;
 }

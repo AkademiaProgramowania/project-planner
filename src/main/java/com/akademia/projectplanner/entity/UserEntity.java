@@ -1,6 +1,5 @@
 package com.akademia.projectplanner.entity;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,13 +12,13 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String email;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    private List<TaskEntity> tasks;
+  private String name;
+  private String email;
 
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+  private List<TaskEntity> tasks;
 }
