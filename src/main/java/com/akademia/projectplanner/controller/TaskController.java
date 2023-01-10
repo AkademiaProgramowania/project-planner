@@ -19,15 +19,15 @@ public class TaskController {
 
   private TaskService taskService;
 
-    @GetMapping("/task-details/{taskId}")
-    public String getTaskDetailsPage(@PathVariable("taskId") Long taskId, Model model) {
-        try {
-            TaskEntity taskEntity = taskService.getTaskInfo(taskId);
-            model.addAttribute("taskToView", taskEntity);
-        } catch (TaskDoesNotExistException e) {
-            model.addAttribute("noTaskMessage", e.getMessage());
-            return "task-details";
-        }
-        return "task-details";
+  @GetMapping("/task-details/{taskId}")
+  public String getTaskDetailsPage(@PathVariable("taskId") Long taskId, Model model) {
+    try {
+      TaskEntity taskEntity = taskService.getTaskInfo(taskId);
+      model.addAttribute("taskToView", taskEntity);
+    } catch (TaskDoesNotExistException e) {
+      model.addAttribute("noTaskMessage", e.getMessage());
+      return "task-details";
     }
+    return "task-details";
+  }
 }

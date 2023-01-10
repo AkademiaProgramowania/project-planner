@@ -28,7 +28,8 @@
             <div class="field">
                 <label>Task name</label>
                 <div>
-                    <input th:field="${taskRequest.name}" class="input" required>
+                    <input th:field="${taskRequest.name}" class="input">
+                    <td th:if="${#fields.hasErrors('taskRequest.name')}" th:errors="${registerRequest.name}">Name Error</td>
                 </div>
             </div>
             <div class="field">
