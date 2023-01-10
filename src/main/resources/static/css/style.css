@@ -1,8 +1,8 @@
-
 * {
     background-color:#ebe8e9;
     font-family: 'Courier New', Courier, monospace;
     color: black;
+    box-sizing: border-box;
 }
 
 li, a, button {
@@ -19,7 +19,7 @@ header {
     display: flex;
     justify-content:space-between;
     align-items: center;
-    margin: 30px 0 0 0;
+    margin: 30px 20px 0px 20px;
 }
 
 .logo{
@@ -28,6 +28,8 @@ header {
 
 .navbar_links {
     list-style: none;
+    margin: 30px 0 0 0;
+    padding: 0px;
 }
 
 .navbar_links li {
@@ -59,8 +61,8 @@ button:hover{
 
 .status-cards {
     display: flex;
-    justify-content:space-evenly;
-    margin: 60px 0 0 0;
+    justify-content:space-between;
+    margin: 60px 0px;
 }
 .status-cards h1 {
     text-align: center;
@@ -86,7 +88,7 @@ button:hover{
     height: fit-content;
     width: 500px;
     border-radius: 5px;
-    margin: 0px 0px 0 40px;
+    margin: 0px 0px 0 20px;
 }
 
 .list-title-todo {
@@ -103,6 +105,10 @@ button:hover{
     padding: 0 0.6rem 0.5rem;
     list-style: none;
     background-color: rgb(117,70,74);
+}
+
+.list-items-todo div {
+    background-color: inherit;
 }
 
 .list-items-todo li {
@@ -140,6 +146,11 @@ button:hover{
     background-color: rgba(170,124,122);
 }
 
+.list-items-inprogress div {
+    background-color: inherit;
+}
+
+
 .list-items-inprogress li {
     background-color: #fff;
     font-size: 20px;
@@ -149,7 +160,6 @@ button:hover{
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
-
 
 .task-list-inreview {
     flex-direction: column;
@@ -176,6 +186,10 @@ button:hover{
     background-color: rgba(190,171,167);
 }
 
+.list-items-inreview div {
+    background-color: inherit;
+}
+
 .list-items-inreview li {
     background-color: #fff;
     font-size: 20px;
@@ -186,16 +200,13 @@ button:hover{
     transition: all 0.3s ease 0s;
 }
 
-
-
-
 .task-list-done {
     flex-direction: column;
     background-color: rgba(232,219,212);
     height: fit-content;
     width: 500px;
     border-radius: 5px;
-    margin: 0px 0px 0 20px;
+    margin: 0px 20px 0 20px;
 }
 
 .list-title-done {
@@ -212,6 +223,10 @@ button:hover{
     padding: 0 0.6rem 0.5rem;
     list-style: none;
     background-color: rgba(232,219,212, 1);
+}
+
+.list-items-done div {
+    background-color: inherit;
 }
 
 .list-items-done li {

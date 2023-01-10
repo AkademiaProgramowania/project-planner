@@ -19,40 +19,46 @@
 <div class="status-cards">
     <div class="task-list-todo">
         <h1 class="list-title-todo">To do</h1>
-        <ul class="list-items-todo">
-            <li>Very long task to see if it fits or not very long task description</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-            <li>Test task</li>
-        </ul>
+            <ul class="list-items-todo">
+                <div th:each="task:${tasks}" th:if="${task.status} == 'To do'">
+                    <a th:href="@{'/task-details/' + ${task.id}}">
+                        <li th:text="${task.name}">
+                        </li>
+                    </a>
+                </div>
+            </ul>
     </div>
     <div class="task-list-inprogress">
         <h1 class="list-title-inprogress">In progress</h1>
         <ul class="list-items-inprogress">
-            <li>Test task</li>
-            <li>Test task</li>
+            <div th:each="task:${tasks}" th:if="${task.status} == 'In progress'">
+                <a th:href="@{'/task-details/' + ${task.id}}">
+                    <li th:text="${task.name}">
+                    </li>
+                </a>
+            </div>
         </ul>
     </div>
     <div class="task-list-inreview">
         <h1 class="list-title-inreview">In review</h1>
         <ul class="list-items-inreview">
-            <li>Test task</li>
-            <li>Test task</li>
+            <div th:each="task:${tasks}" th:if="${task.status} == 'In review'">
+                <a th:href="@{'/task-details/' + ${task.id}}">
+                    <li th:text="${task.name}">
+                    </li>
+                </a>
+            </div>
         </ul>
     </div>
     <div class="task-list-done">
         <h1 class="list-title-done">Done</h1>
         <ul class="list-items-done">
-            <li>Test task</li>
-            <li>Test task</li>
+            <div th:each="task:${tasks}" th:if="${task.status} == 'Done'">
+                <a th:href="@{'/task-details/' + ${task.id}}">
+                    <li th:text="${task.name}">
+                    </li>
+                </a>
+            </div>
         </ul>
     </div>
 </div>
