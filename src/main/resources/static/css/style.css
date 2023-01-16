@@ -232,3 +232,12 @@ header {
     opacity: 1;
     pointer-events: all;
 }
+
+.error {
+    color: red;
+}
+
+.required:after {
+    content:"*";
+    color: red;
+}

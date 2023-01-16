@@ -39,7 +39,7 @@ public class HomeController {
   @PostMapping("/")
   public String processAddingTask(@Valid @ModelAttribute("taskRequest") TaskDto taskDto, BindingResult bindingResult, Model model) {
     if (bindingResult.hasErrors()) {
-      return "redirect:/";
+      return "index";
     }
     try {
       taskService.addTask(taskDto);

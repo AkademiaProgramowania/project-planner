@@ -11,7 +11,7 @@
         <ul class="navbar-links">
             <li class="pointer">LOGO</li>
             <li><a href="">Home</a></li>
-            <li><button id="add-task" class="pointer">Add task</button></li>
+            <li><button id="add-task-button" class="pointer">Add task</button></li>
         </ul>
     </nav>
     <a href=""><button class="sign-in pointer">Sign in</button></a>
@@ -22,24 +22,24 @@
         <button data-close-button class="close-button pointer">&times;</button>
     </div>
     <div class="task-body">
-        <div th:text="${fieldsNotFilledMessage}">error</div>
-        <div th:text="${invalidDateMessage}">error</div>
+
         <form action="/" method="post">
             <div class="field">
-                <label>Task name</label>
+                <label class="required">Task name</label>
                 <div>
                     <input th:field="${taskRequest.name}" class="input">
-                    <td th:if="${#fields.hasErrors('taskRequest.name')}" th:errors="${registerRequest.name}">Name Error</td>
+                    <div th:if="${#fields.hasErrors('taskRequest.name')}" th:errors="${taskRequest.name}" class="error">Name Error</div>
                 </div>
             </div>
+
             <div class="field">
                 <label>Status</label>
                 <div>
                     <select th:field="${taskRequest.status}" class="input pointer">
-                        <option value="To do">To do</option>
-                        <option value="In review">In review</option>
-                        <option value="In progress">In progress</option>
-                        <option value="Done">Done</option>
+                        <option value="toDo">To do</option>
+                        <option value="inReview">In review</option>
+                        <option value="inProgress">In progress</option>
+                        <option value="done">Done</option>
                     </select>
                 </div>
             </div>
@@ -54,6 +54,7 @@
                 <div>
                     <input th:field="${taskRequest.deadline}" type="date" id="deadline" class="input pointer">
                 </div>
+                <div th:text="${invalidDateMessage}" class="error">error</div>
             </div>
             <div class="submit-container">
                 <input class="submit-button pointer" type="submit" value="Create">
@@ -67,7 +68,7 @@
     <div class="status-cards-todo">
         <h1>To do</h1>
         <ul>
-            <div th:each="task:${tasks}" th:if="${task.status} == 'To do'">
+            <div th:each="task:${tasks}" th:if="${task.status} == 'toDo'">
                 <a th:href="@{'/task-details/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
@@ -78,7 +79,7 @@
     <div class="status-cards-inprogress">
         <h1>In progress</h1>
         <ul>
-            <div th:each="task:${tasks}" th:if="${task.status} == 'In progress'">
+            <div th:each="task:${tasks}" th:if="${task.status} == 'inProgress'">
                 <a th:href="@{'/task-details/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
@@ -89,7 +90,7 @@
     <div class="status-cards-inreview">
         <h1>In review</h1>
         <ul class="list-items-inreview">
-            <div th:each="task:${tasks}" th:if="${task.status} == 'In review'">
+            <div th:each="task:${tasks}" th:if="${task.status} == 'inReview'">
                 <a th:href="@{'/task-details/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
@@ -100,7 +101,7 @@
     <div class="status-cards-done">
         <h1>Done</h1>
         <ul class="list-items-done">
-            <div th:each="task:${tasks}" th:if="${task.status} == 'Done'">
+            <div th:each="task:${tasks}" th:if="${task.status} == 'done'">
                 <a th:href="@{'/task-details/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
