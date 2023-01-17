@@ -37,7 +37,10 @@ public class HomeController {
   }
 
   @PostMapping("/")
-  public String processAddingTask(@Valid @ModelAttribute("taskRequest") TaskDto taskDto, BindingResult bindingResult, Model model) {
+  public String processAddingTask(
+      @Valid @ModelAttribute("taskRequest") TaskDto taskDto,
+      BindingResult bindingResult,
+      Model model) {
     if (bindingResult.hasErrors()) {
       return "index";
     }
