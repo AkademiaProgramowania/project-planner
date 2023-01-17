@@ -13,26 +13,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegistrationController {
 
-    private RegistrationService registrationService;
+  private RegistrationService registrationService;
 
-    @GetMapping("/registration")
-    public String getRegistrationPage(Model model) {
-        RegistrationDto registrationDto = new RegistrationDto();
-        model.addAttribute("registrationDto", registrationDto);
-        return "registration";
-    }
+  @GetMapping("/registration")
+  public String getRegistrationPage(Model model) {
+    RegistrationDto registrationDto = new RegistrationDto();
+    model.addAttribute("registrationDto", registrationDto);
+    return "registration";
+  }
 
-    @PostMapping("/registered")
-    public String register(RegistrationDto registrationDto, Model model) {
-        try {
-            registrationService.register(registrationDto);
-        } catch (IllegalArgumentException i) {
-            model.addAttribute("fieldsNotFilledMessage", i.getMessage());
-            return "registration";
-        } catch (RegistrationException e) {
-            model.addAttribute("registrationErrorMessage", e.getMessage());
-            return "registration";
-        }
-        return "registered";
+  @PostMapping("/registered")
+  public String register(RegistrationDto registrationDto, Model model) {
+    try {
+      registrationService.register(registrationDto);
+    } catch (IllegalArgumentException i) {
+      model.addAttribute("fieldsNotFilledMessage", i.getMessage());
+      return "registration";
+    } catch (RegistrationException e) {
+      model.addAttribute("registrationErrorMessage", e.getMessage());
+      return "registration";
     }
+    return "registered";
+  }
 }

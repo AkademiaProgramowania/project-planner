@@ -1,5 +1,11 @@
-* {
+:root {
+--hover-color: rgba(191, 161, 129, 0.8);
+}
+html {
     background-color:#ebe8e9;
+}
+
+* {
     font-family: 'Courier New', Courier, monospace;
     color: black;
     box-sizing: border-box;
@@ -11,58 +17,57 @@ li, a, button {
     text-decoration: none;
 }
 
-nav li {
-    border-left: solid black 1px;
-}
-
 header {
     display: flex;
     justify-content:space-between;
     align-items: center;
-    margin: 30px 20px 0px 20px;
+    margin: 30px 20px 0px;
 }
 
-.logo{
+.pointer {
     cursor: pointer;
 }
 
-.navbar_links {
+.navbar-links {
     list-style: none;
     margin: 30px 0 0 0;
     padding: 0px;
 }
 
-.navbar_links li {
+.navbar-links li {
     display: inline-block;
     padding: 0px 20px;
+    border-left: solid black 1px;
 }
 
-.navbar_links li a {
+.navbar-links li * {
     transition: all 0.3s ease 0s;
+    border: none;
+    background-color: inherit;
 }
 
-.navbar_links li a:hover {
-    color:#BFA181;
+.navbar-links li *:hover {
+    color:var(--hover-color)
 }
 
-button {
+.sign-in {
     padding: 10px 25px;
     background-color: rgba(191, 161, 129, 1);
     border: none;
     border-radius: 50px;
-    cursor: pointer;
     transition: all 0.3s ease 0s;
     margin: 20px 0 0 0;
 }
 
-button:hover{
-    background-color: rgba(191, 161, 129, 0.8);
+.sign-in:hover{
+    background-color: var(--hover-color);
 }
 
 .status-cards {
     display: flex;
     justify-content:space-between;
-    margin: 60px 0px;
+    margin: 60px 20px 0px;
+    gap: 20px;
 }
 .status-cards h1 {
     text-align: center;
@@ -74,7 +79,6 @@ button:hover{
     padding: 10px 10px;
     margin-bottom: 10px;
     word-wrap: break-word;
-    cursor: pointer;
     transition: all 0.3s ease 0s;
 }
 
@@ -82,159 +86,158 @@ button:hover{
     background-color: rgb(252, 197, 135);
 }
 
-.task-list-todo {
+.status-cards > div {
     flex-direction: column;
-    background-color: rgb(117,70,74);
     height: fit-content;
     width: 500px;
     border-radius: 5px;
-    margin: 0px 0px 0 20px;
 }
 
-.list-title-todo {
+.status-cards h1 {
     font-size: 1.4rem;
     font-weight: 700;
-    background-color: rgb(117,70,74);
     padding: 1rem;
+    background-color: inherit;
 }
 
-.list-items-todo {
+.status-cards ul {
     display: flex;
     flex-direction: column;
     align-content: start;
     padding: 0 0.6rem 0.5rem;
     list-style: none;
+}
+
+.status-cards-todo {
+
     background-color: rgb(117,70,74);
 }
 
-.list-items-todo div {
-    background-color: inherit;
-}
-
-.list-items-todo li {
-    background-color: #fff;
-    font-size: 20px;
-    padding: 10px 10px;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-.task-list-inprogress {
-    flex-direction: column;
-    background-color: rgba(170,124,122);
-    height: fit-content;
-    width: 500px;
-    border-radius: 5px;
-    margin: 0px 0px 0 20px;
-}
-
-.list-title-inprogress{
-    font-size: 1.4rem;
-    font-weight: 700;
-    background-color: rgba(170,124,122);
-    padding: 1rem;
-}
-
-.list-items-inprogress {
-    display: flex;
-    flex-direction: column;
-    align-content: start;
-    padding: 0 0.6rem 0.5rem;
-    list-style: none;
+.status-cards-inprogress {
     background-color: rgba(170,124,122);
 }
 
-.list-items-inprogress div {
-    background-color: inherit;
-}
-
-
-.list-items-inprogress li {
-    background-color: #fff;
-    font-size: 20px;
-    padding: 10px 10px;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-.task-list-inreview {
-    flex-direction: column;
-    background-color: rgba(190,171,167);
-    height: fit-content;
-    width: 500px;
-    border-radius: 5px;
-    margin: 0px 0px 0 20px;
-}
-
-.list-title-inreview{
-    font-size: 1.4rem;
-    font-weight: 700;
-    background-color: rgba(190,171,167);
-    padding: 1rem;
-}
-
-.list-items-inreview {
-    display: flex;
-    flex-direction: column;
-    align-content: start;
-    padding: 0 0.6rem 0.5rem;
-    list-style: none;
+.status-cards-inreview {
     background-color: rgba(190,171,167);
 }
 
-.list-items-inreview div {
-    background-color: inherit;
-}
-
-.list-items-inreview li {
-    background-color: #fff;
-    font-size: 20px;
-    padding: 10px 10px;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-.task-list-done {
-    flex-direction: column;
+.status-cards-done {
     background-color: rgba(232,219,212);
+}
+
+.add-task {
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 10;
+    background-color: white;
+    width: 600px;
     height: fit-content;
-    width: 500px;
-    border-radius: 5px;
-    margin: 0px 20px 0 20px;
+    padding: 20px 0px;
+}
+.add-task.active {
+    transform: translate(-50%, -50%) scale(1);
+
+}
+.task-header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid darkblue; */
 }
 
-.list-title-done {
+.task-header .title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.task-header .close-button {
+    border:none;
+    background:none;
+    font-size:1.6rem;
+    font-weight: bold;
+    transition: all 0.3s ease 0s;
+}
+
+.task-header .close-button:hover {
+    background-color: var(--hover-color)
+}
+
+.task-body {
     font-size: 1.4rem;
-    font-weight: 700;
-    background-color: rgba(232,219,212);
-    padding: 1rem;
-}
-
-.list-items-done {
+    padding: 20px 20px;
     display: flex;
     flex-direction: column;
-    align-content: start;
-    padding: 0 0.6rem 0.5rem;
-    list-style: none;
-    background-color: rgba(232,219,212, 1);
 }
 
-.list-items-done div {
-    background-color: inherit;
+.task-body .field {
+    padding: 10px 0px;
+    /* border: 2px solid darkcyan; */
+}
+.task-body .submit-container {
+    text-align: end;
+    padding: 20px 0px;
 }
 
-.list-items-done li {
-    background-color: #fff;
-    font-size: 20px;
-    padding: 10px 10px;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-    cursor: pointer;
+.task-body .submit-container .submit-button {
+    background-color: rgba(191, 161, 129, 1);
+    padding: 10px;
+    font-size: 1.4rem;
     transition: all 0.3s ease 0s;
+    border: none;
+}
+
+.task-body .submit-container .submit-button:hover {
+    background-color: var(--hover-color);
+}
+.task-body .field .input {
+    width: 100%;
+    height: 40px;
+    background-color: rgba(191, 161, 129, 0.1);
+    border: 0.5px solid var(--hover-color);
+    transition: all 0.3s ease 0s;
+    font-size: large;
+
+}
+
+.task-body .field .task-description {
+    width: 100%;
+    height: 250px;
+    background-color: rgba(191, 161, 129, 0.1);
+    border: 0.5px solid var(--hover-color);
+    transition: all 0.3s ease 0s;
+    font-size: large;
+    overflow-y: auto;
+    resize:none;
+}
+
+.task-body .field .input:hover {
+    background-color: rgba(191, 161, 129, 0.3);
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.error {
+    color: red;
+}
+
+.required:after {
+    content:"*";
+    color: red;
 }

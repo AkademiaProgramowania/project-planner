@@ -11,28 +11,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegistrationService {
 
-    private UserRepository userRepository;
+  private UserRepository userRepository;
 
-    public void register(RegistrationDto registrationDto) {
-        if (checkMandatoryFieldsInRegistration(registrationDto)) {
-            throw new IllegalArgumentException("Mandatory fields are not filled in!");
-        }
-        if (userRepository.existsByEmail(registrationDto.getEmail()) ||
-                !checkPasswordCorrectness(registrationDto)) {
-            throw new RegistrationException("Email or password is not correct!");
-        }
-        UserEntity userEntity = new UserEntity(registrationDto.getName(), registrationDto.getEmail(),
-                registrationDto.getPassword());
-        userRepository.save(userEntity);
+  public void register(RegistrationDto registrationDto) {
+    if (checkMandatoryFieldsInRegistration(registrationDto)) {
+      throw new IllegalArgumentException("Mandatory fields are not filled in!");
     }
-
-    private boolean checkMandatoryFieldsInRegistration(RegistrationDto registrationDto) {
-        return registrationDto.getName().isBlank() || registrationDto.getEmail().isBlank() ||
-                registrationDto.getPassword().isBlank();
-
+    if (userRepository.existsByEmail(registrationDto.getEmail())
+        || !checkPasswordCorrectness(registrationDto)) {
+      throw new RegistrationException("Email or password is not correct!");
     }
+    UserEntity userEntity =
+        new UserEntity(
+            registrationDto.getName(), registrationDto.getEmail(), registrationDto.getPassword());
+    userRepository.save(userEntity);
+  }
 
-    private boolean checkPasswordCorrectness(RegistrationDto registrationDto) {
-        return registrationDto.getPassword().equals(registrationDto.getPasswordRepeated());
-    }
+  private boolean checkMandatoryFieldsInRegistration(RegistrationDto registrationDto) {
+    return registrationDto.getName().isBlank()
+        || registrationDto.getEmail().isBlank()
+        || registrationDto.getPassword().isBlank();
+  }
+
+  private boolean checkPasswordCorrectness(RegistrationDto registrationDto) {
+    return registrationDto.getPassword().equals(registrationDto.getPasswordRepeated());
+  }
 }
