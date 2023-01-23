@@ -1,7 +1,6 @@
 package com.akademia.projectplanner.controller;
 
 import com.akademia.projectplanner.dto.TaskDto;
-import com.akademia.projectplanner.entity.TaskEntity;
 import com.akademia.projectplanner.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,8 +22,9 @@ public class HomeController {
 
   @GetMapping("/")
   public String getMainPage(Model model) {
-    List<TaskEntity> taskEntities = taskService.getAllTasks();
-    model.addAttribute("tasks", taskEntities);
+    List<TaskDto> allTasks = taskService.getAllTasks();
+
+    model.addAttribute("tasks", allTasks);
 
     getTaskRequest(model);
     return "index";
