@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -29,7 +28,6 @@ public class TaskService {
       throw new DateTimeException("Invalid date selected!");
     }
 
-    taskDto.setStartDate(LocalDate.now());
     TaskEntity taskEntity = taskMapper.toTaskEntity(taskDto);
     taskRepository.save(taskEntity);
   }
@@ -50,12 +48,11 @@ public class TaskService {
   }
 
   public TaskDto getTaskInfo(Long taskId) {
-    Optional<TaskEntity> taskOptional = taskRepository.findById(taskId);
-    if (!taskOptional.isPresent()) {
-      throw new TaskDoesNotExistException("Task does not exist!");
-    } else {
-      TaskEntity taskEntity = taskOptional.get();
-      return taskMapper.toTaskDto(taskEntity);
-    }
+    TaskEntity foundTask =
+        taskRepository
+            .findById(taskId)
+            .orElseThrow(() -> new TaskDoesNotExistException("Task does not exist!"));
+
+    return taskMapper.toTaskDto(foundTask);
   }
 }
