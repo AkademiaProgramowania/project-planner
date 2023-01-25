@@ -18,11 +18,11 @@ function injectListeners() {
 function turnOnAddTaskWindow()
 {
     document.querySelector('#overlay').classList.add('active')
-    document.querySelector('.add-task').classList.add('active')
+    document.querySelector('.task-window').classList.add('active')
 }
 
 function turnOffAddTaskWindow()
 {
     document.querySelector('#overlay').classList.remove('active')
-    document.querySelector('.add-task').classList.remove('active')
+    document.querySelector('.task-window').classList.remove('active')
 }
