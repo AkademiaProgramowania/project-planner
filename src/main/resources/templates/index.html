@@ -69,7 +69,7 @@
         <h1>To do</h1>
         <ul>
             <div th:each="task:${tasks}" th:if="${task.status} == 'toDo'">
-                <a th:href="@{'/task-details/' + ${task.id}}">
+                <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
                 </a>
@@ -80,7 +80,7 @@
         <h1>In progress</h1>
         <ul>
             <div th:each="task:${tasks}" th:if="${task.status} == 'inProgress'">
-                <a th:href="@{'/task-details/' + ${task.id}}">
+                <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
                 </a>
@@ -91,7 +91,7 @@
         <h1>In review</h1>
         <ul class="list-items-inreview">
             <div th:each="task:${tasks}" th:if="${task.status} == 'inReview'">
-                <a th:href="@{'/task-details/' + ${task.id}}">
+                <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
                 </a>
@@ -102,7 +102,7 @@
         <h1>Done</h1>
         <ul class="list-items-done">
             <div th:each="task:${tasks}" th:if="${task.status} == 'done'">
-                <a th:href="@{'/task-details/' + ${task.id}}">
+                <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
                 </a>

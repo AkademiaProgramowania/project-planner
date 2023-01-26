@@ -31,7 +31,7 @@ public class TaskMapper {
     taskEntity.setStatus(taskDto.getStatus());
     taskEntity.setDeadline(taskDto.getDeadline());
     taskEntity.setStartDate(taskDto.getStartDate());
-    taskEntity.setUser(taskDto.getUserEntity());
+    taskEntity.setUser(taskDto.getUser());
 
     return taskEntity;
   }
@@ -50,7 +50,7 @@ public class TaskMapper {
     taskDto.setStatus(taskEntity.getStatus());
     taskDto.setDeadline(taskEntity.getDeadline());
     taskDto.setStartDate(taskEntity.getStartDate());
-    taskDto.setUserEntity(taskEntity.getUser());
+    taskDto.setUser(taskEntity.getUser());
 
     return taskDto;
   }

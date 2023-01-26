@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Project Planner</title>
+</head>
+
+<body>
+<form th:object="${taskToEdit}" th:action="@{/edit/}" method="post">
+<div class="task-window details">
+    <div class="task-header">
+        <div class="title">Edit task</div>
+        <a href="/" class="close-button pointer">&times;</a>
+    </div>
+    <div class="task-body">
+            <input type="hidden" name="id" th:value="${taskToEdit.id}"/>
+            <input type="hidden" name="startDate" th:value="${taskToEdit.startDate}"/>
+            <div class="field">
+                <label for="name">Task name</label>
+                <div>
+                    <input th:field="${taskToEdit.name}" id="name" class="input pointer">
+<!--                    zbadac error-->
+<!--                    <div th:if="${#fields.hasErrors('taskToEdit.name')}" th:errors="${taskToEdit.name}"></div>-->
+                </div>
+            </div>
+        <div class="field">
+            <label>Status</label>
+            <div>
+                <select th:field="${taskToEdit.status}" class="input pointer" name="status">
+                    <option value="toDo">To do</option>
+                    <option value="inReview">In review</option>
+                    <option value="inProgress">In progress</option>
+                    <option value="done">Done</option>
+                </select>
+            </div>
+        </div>
+            <div class="field">
+                <label for="description">Description</label>
+                <div>
+                    <textarea th:field="${taskToEdit.description}" id="description" class="task-description"></textarea>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="deadline">Deadline</label>
+                <div>
+                    <input th:field="${taskToEdit.deadline}" type="date" id="deadline" class="input pointer">
+                </div>
+                <div th:text="${invalidDateMessage}" class="error">error</div>
+            </div>
+            <div class="submit-container">
+                <input class="submit-button pointer" type="submit" value="Update">
+            </div>
+
+    </div>
+
+</div>
+</form>
+</body>
+</html>

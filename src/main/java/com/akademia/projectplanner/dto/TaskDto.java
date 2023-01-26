@@ -3,6 +3,7 @@ package com.akademia.projectplanner.dto;
 import com.akademia.projectplanner.entity.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
@@ -19,6 +20,9 @@ public class TaskDto {
   private String status;
   private String description;
   private String deadline;
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate startDate;
-  private UserEntity userEntity;
+
+  private UserEntity user;
 }
