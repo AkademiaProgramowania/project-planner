@@ -126,27 +126,23 @@ header {
 }
 
 .task-window {
-    position:fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     z-index: 10;
     background-color: white;
     width: 600px;
-    height: fit-content;
     padding: 20px 0px;
 }
+
 .task-window.active {
     transform: translate(-50%, -50%) scale(1);
-
 }
 
 .task-window.details {
-    height: 100vh;
     transform: translate(-50%, -50%) scale(1);
     background-color: white;
-    width: 600px;
-    padding: 20px 0px;
 }
 
 .task-header {
@@ -154,7 +150,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* border: 2px solid darkblue; */
 }
 
 .task-header .title {
@@ -183,7 +178,6 @@ header {
 
 .task-body .field {
     padding: 10px 0px;
-    /* border: 2px solid darkcyan; */
 }
 .task-body .submit-container {
     text-align: end;
@@ -198,9 +192,22 @@ header {
     border: none;
 }
 
+.task-body .submit-container .cancel {
+    background-color: transparent;
+    padding: 10px;
+    font-size: 1.4rem;
+    transition: all 0.3s ease 0s;
+    border: none;
+}
+
 .task-body .submit-container .submit-button:hover {
     background-color: var(--hover-color);
 }
+
+.task-body .submit-container .cancel:hover {
+    background-color: rgba(191, 161, 129, 0.3);
+}
+
 .task-body .field .input {
     width: 100%;
     height: 40px;

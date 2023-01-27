@@ -25,17 +25,17 @@
 
         <form action="/" method="post">
             <div class="field">
-                <label class="required">Task name</label>
+                <label for="name" class="required">Task name</label>
                 <div>
-                    <input th:field="${taskRequest.name}" class="input">
+                    <input th:field="${taskRequest.name}" id="name" class="input">
                     <div th:if="${#fields.hasErrors('taskRequest.name')}" th:errors="${taskRequest.name}" class="error">Name Error</div>
                 </div>
             </div>
 
             <div class="field">
-                <label>Status</label>
+                <label for="status">Status</label>
                 <div>
-                    <select th:field="${taskRequest.status}" class="input pointer">
+                    <select th:field="${taskRequest.status}" id="status" class="input pointer">
                         <option value="toDo">To do</option>
                         <option value="inReview">In review</option>
                         <option value="inProgress">In progress</option>

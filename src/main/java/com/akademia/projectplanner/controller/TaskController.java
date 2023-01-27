@@ -35,7 +35,6 @@ public class TaskController {
     return "edit-task";
   }
 
-
   @PostMapping("/edit")
   public String editTask(
       @Valid @ModelAttribute("taskToEdit") TaskDto taskDto,

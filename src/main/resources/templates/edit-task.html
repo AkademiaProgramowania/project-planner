@@ -6,8 +6,9 @@
 </head>
 
 <body>
+
 <form th:object="${taskToEdit}" th:action="@{/edit/}" method="post">
-<div class="task-window details">
+    <div class="task-window details">
     <div class="task-header">
         <div class="title">Edit task</div>
         <a href="/" class="close-button pointer">&times;</a>
@@ -16,17 +17,16 @@
             <input type="hidden" name="id" th:value="${taskToEdit.id}"/>
             <input type="hidden" name="startDate" th:value="${taskToEdit.startDate}"/>
             <div class="field">
-                <label for="name">Task name</label>
+                <label for="name" class="required">Task name</label>
                 <div>
                     <input th:field="${taskToEdit.name}" id="name" class="input pointer">
-<!--                    zbadac error-->
-<!--                    <div th:if="${#fields.hasErrors('taskToEdit.name')}" th:errors="${taskToEdit.name}"></div>-->
+                    <div th:if="${#fields.hasErrors('name')}" th:errors="${taskToEdit.name}" class="error">Name Error</div>
                 </div>
             </div>
         <div class="field">
-            <label>Status</label>
+            <label for="status">Status</label>
             <div>
-                <select th:field="${taskToEdit.status}" class="input pointer" name="status">
+                <select th:field="${taskToEdit.status}" class="input pointer" id="status" name="status">
                     <option value="toDo">To do</option>
                     <option value="inReview">In review</option>
                     <option value="inProgress">In progress</option>
@@ -49,12 +49,12 @@
                 <div th:text="${invalidDateMessage}" class="error">error</div>
             </div>
             <div class="submit-container">
-                <input class="submit-button pointer" type="submit" value="Update">
+                <a href="/" class="cancel pointer">Cancel</a>
+                <input class="submit-button pointer" type="submit" value="Save">
             </div>
 
     </div>
-
-</div>
+    </div>
 </form>
 </body>
 </html>
