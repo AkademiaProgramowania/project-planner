@@ -7,14 +7,12 @@ import com.akademia.projectplanner.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
 import java.time.DateTimeException;
 
 @AllArgsConstructor
@@ -27,30 +25,31 @@ public class TaskController {
   public String getTaskEditPage(@PathVariable("taskId") Long taskId, Model model) {
     try {
       TaskDto taskDto = taskService.getTaskInfo(taskId);
-      model.addAttribute("taskToEdit", taskDto);
+      model.addAttribute("task", taskDto);
     } catch (TaskDoesNotExistException e) {
       model.addAttribute("noTaskMessage", e.getMessage());
-      return "edit-task";
+      return "task";
     }
-    return "edit-task";
+    return "task";
   }
 
-  @PostMapping("/edit")
-  public String editTask(
-      @Valid @ModelAttribute("taskToEdit") TaskDto taskDto,
-      BindingResult bindingResult,
-      Model model) {
-    if (bindingResult.hasErrors()) {
-      return "edit-task";
-    }
+  @GetMapping("/add-task")
+  public String getAddTaskPage(Model model) {
+    TaskDto taskDto = new TaskDto();
+    model.addAttribute("task", taskDto);
+    return "task";
+  }
+
+  @PostMapping("/task")
+  public String addOrUpdateTask(@ModelAttribute("task") TaskDto taskDto, Model model) {
     try {
       taskService.addTask(taskDto);
     } catch (IllegalArgumentException e) {
       model.addAttribute("fieldsNotFilledMessage", e.getMessage());
-      return "edit-task";
+      return "task";
     } catch (DateTimeException d) {
       model.addAttribute("invalidDateMessage", d.getMessage());
-      return "edit-task";
+      return "task";
     }
     return "redirect:/";
   }

@@ -125,23 +125,14 @@ header {
     background-color: rgba(232,219,212);
 }
 
-.task-window {
+.task-window.details {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0);
     z-index: 10;
-    background-color: white;
     width: 600px;
     padding: 20px 0px;
-}
-
-.task-window.active {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.task-window.details {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
     background-color: white;
 }
 
@@ -231,22 +222,6 @@ header {
 
 .task-body .field .input:hover {
     background-color: rgba(191, 161, 129, 0.3);
-}
-
-#overlay {
-    position: fixed;
-    opacity: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    pointer-events: none;
-}
-
-#overlay.active {
-    opacity: 1;
-    pointer-events: all;
 }
 
 .error {
