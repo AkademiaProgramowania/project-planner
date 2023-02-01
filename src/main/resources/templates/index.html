@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <link th:href="@{/css/style.css}" rel="stylesheet">
-    <script src="js/addTask.js"></script>
     <title>Project Planner</title>
 </head>
 <body>
@@ -11,65 +10,17 @@
         <ul class="navbar-links">
             <li class="pointer">LOGO</li>
             <li><a href="">Home</a></li>
-            <li><button id="add-task-button" class="pointer">Add task</button></li>
+            <li><a href="add-task" class="pointer">Add task</a></li>
         </ul>
     </nav>
     <a href=""><button class="sign-in pointer">Sign in</button></a>
 </header>
-<div class="add-task">
-    <div class="task-header">
-        <div class="title">Add task</div>
-        <button data-close-button class="close-button pointer">&times;</button>
-    </div>
-    <div class="task-body">
-
-        <form action="/" method="post">
-            <div class="field">
-                <label class="required">Task name</label>
-                <div>
-                    <input th:field="${taskRequest.name}" class="input">
-                    <div th:if="${#fields.hasErrors('taskRequest.name')}" th:errors="${taskRequest.name}" class="error">Name Error</div>
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Status</label>
-                <div>
-                    <select th:field="${taskRequest.status}" class="input pointer">
-                        <option value="toDo">To do</option>
-                        <option value="inReview">In review</option>
-                        <option value="inProgress">In progress</option>
-                        <option value="done">Done</option>
-                    </select>
-                </div>
-            </div>
-            <div class="field">
-                <label for="description">Description</label>
-                <div>
-                    <textarea th:field="${taskRequest.description}" id="description" class="task-description"></textarea>
-                </div>
-            </div>
-            <div class="field">
-                <label for="deadline">Deadline</label>
-                <div>
-                    <input th:field="${taskRequest.deadline}" type="date" id="deadline" class="input pointer">
-                </div>
-                <div th:text="${invalidDateMessage}" class="error">error</div>
-            </div>
-            <div class="submit-container">
-                <input class="submit-button pointer" type="submit" value="Create">
-            </div>
-        </form>
-    </div>
-
-</div>
-<div id="overlay"></div>
 <div class="status-cards">
     <div class="status-cards-todo">
         <h1>To do</h1>
         <ul>
             <div th:each="task:${tasks}" th:if="${task.status} == 'toDo'">
-                <a th:href="@{'/task-details/' + ${task.id}}">
+                <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
                 </a>
@@ -80,7 +31,7 @@
         <h1>In progress</h1>
         <ul>
             <div th:each="task:${tasks}" th:if="${task.status} == 'inProgress'">
-                <a th:href="@{'/task-details/' + ${task.id}}">
+                <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
                 </a>
@@ -91,7 +42,7 @@
         <h1>In review</h1>
         <ul class="list-items-inreview">
             <div th:each="task:${tasks}" th:if="${task.status} == 'inReview'">
-                <a th:href="@{'/task-details/' + ${task.id}}">
+                <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
                 </a>
@@ -102,7 +53,7 @@
         <h1>Done</h1>
         <ul class="list-items-done">
             <div th:each="task:${tasks}" th:if="${task.status} == 'done'">
-                <a th:href="@{'/task-details/' + ${task.id}}">
+                <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
                 </a>
