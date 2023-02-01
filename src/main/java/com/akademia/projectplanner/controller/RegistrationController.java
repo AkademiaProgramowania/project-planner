@@ -1,6 +1,6 @@
 package com.akademia.projectplanner.controller;
 
-import com.akademia.projectplanner.dto.RegistrationDto;
+import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.exception.RegistrationException;
 import com.akademia.projectplanner.service.RegistrationService;
 import lombok.AllArgsConstructor;
@@ -17,15 +17,15 @@ public class RegistrationController {
 
   @GetMapping("/registration")
   public String getRegistrationPage(Model model) {
-    RegistrationDto registrationDto = new RegistrationDto();
-    model.addAttribute("registrationDto", registrationDto);
+    UserDto userDto = new UserDto();
+    model.addAttribute("registrationDto", userDto);
     return "registration";
   }
 
   @PostMapping("/registered")
-  public String register(RegistrationDto registrationDto, Model model) {
+  public String register(UserDto userDto, Model model) {
     try {
-      registrationService.register(registrationDto);
+      registrationService.register(userDto);
     } catch (IllegalArgumentException i) {
       model.addAttribute("fieldsNotFilledMessage", i.getMessage());
       return "registration";
