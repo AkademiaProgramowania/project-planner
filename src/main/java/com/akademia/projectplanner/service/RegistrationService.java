@@ -19,8 +19,7 @@ public class RegistrationService {
     if (checkMandatoryFieldsInRegistration(userDto)) {
       throw new IllegalArgumentException("Mandatory fields are not filled in!");
     }
-    if (userRepository.existsByEmail(userDto.getEmail())
-        || !checkPasswordCorrectness(userDto)) {
+    if (userRepository.existsByEmail(userDto.getEmail()) || !checkPasswordCorrectness(userDto)) {
       throw new RegistrationException("Email or password is not correct!");
     }
     UserEntity userEntity = userMapper.toUserEntity(userDto);
