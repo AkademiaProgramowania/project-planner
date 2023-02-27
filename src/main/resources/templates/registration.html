@@ -8,12 +8,12 @@
 <body>
 
 <form action="/registered" method="post">
-    <div class="task-window details">
-        <div class="task-header">
+    <div class="window details">
+        <div class="window-header">
             <div class="title">Registration</div>
             <a href="/" class="close-button pointer">&times;</a>
         </div>
-        <div class="task-body">
+        <div class="window-body">
             <input type="hidden" name="id" th:value="${registrationDto.id}"/>
             <div th:text="${fieldsNotFilledMessage}" class="error">error</div>
             <div th:text="${registrationErrorMessage}" class="error">error</div>
