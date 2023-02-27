@@ -26,6 +26,7 @@ public class UserEntity implements UserDetails {
   private String name;
   private String email;
   private String password;
+
   @Enumerated(EnumType.STRING)
   private Role role;
 
@@ -69,8 +70,7 @@ public class UserEntity implements UserDetails {
   }
 
   @Override
-  public String getPassword()
-  {
+  public String getPassword() {
     return password;
   }
 }

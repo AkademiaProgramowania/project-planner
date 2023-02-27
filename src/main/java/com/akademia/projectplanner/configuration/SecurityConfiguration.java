@@ -19,45 +19,55 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Bean
-    public PasswordEncoder passwordEncoder()
-    {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("administrator")
-                .password(passwordEncoder().encode("adminPass"))
-                .roles(Role.ADMINISTRATOR.getRole())
-                .build());
-        manager.createUser(User.withUsername("architect")
-                .password(passwordEncoder().encode("architectPass"))
-                .roles(Role.ARCHITECT.getRole())
-                .build());
-        manager.createUser(User.withUsername("developer")
-                .password(passwordEncoder().encode("developerPass"))
-                .roles(Role.DEVELOPER.getRole())
-                .build());
-        return manager;
-    }
+  @Bean
+  public UserDetailsService userDetailsService() {
+    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+    manager.createUser(
+        User.withUsername("administrator")
+            .password(passwordEncoder().encode("adminPass"))
+            .roles(Role.ADMINISTRATOR.getRole())
+            .build());
+    manager.createUser(
+        User.withUsername("architect")
+            .password(passwordEncoder().encode("architectPass"))
+            .roles(Role.ARCHITECT.getRole())
+            .build());
+    manager.createUser(
+        User.withUsername("developer")
+            .password(passwordEncoder().encode("developerPass"))
+            .roles(Role.DEVELOPER.getRole())
+            .build());
+    return manager;
+  }
 
-    @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        return http
-                .csrf().disable()
-                .authorizeRequests(auth -> {
-                    auth.antMatchers("/").permitAll();
-                    auth.antMatchers("/add-task").hasAnyRole(Role.ADMINISTRATOR.getRole(), Role.ARCHITECT.getRole());
-                    auth.antMatchers("/edit").hasAnyRole(Role.ADMINISTRATOR.getRole(), Role.ARCHITECT.getRole());
-                })
-                .formLogin()
-                .and()
-                .httpBasic(withDefaults())
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
-                .and()
-                .build();
-    }
+  @Bean
+  public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    return http.csrf()
+        .disable()
+        .authorizeRequests(
+            auth -> {
+              auth.antMatchers("/")
+                  .hasAnyRole(
+                      Role.ADMINISTRATOR.getRole(),
+                      Role.ARCHITECT.getRole(),
+                      Role.DEVELOPER.getRole());
+              ;
+              auth.antMatchers("/add-task")
+                  .hasAnyRole(Role.ADMINISTRATOR.getRole(), Role.ARCHITECT.getRole());
+              auth.antMatchers("/edit")
+                  .hasAnyRole(Role.ADMINISTRATOR.getRole(), Role.ARCHITECT.getRole());
+            })
+        .formLogin((formLogin) -> formLogin.loginPage("/registration").permitAll())
+        .httpBasic(withDefaults())
+        .logout()
+        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .permitAll()
+        .and()
+        .build();
+  }
 }
