@@ -7,13 +7,13 @@
 
 <body>
 <form th:object="${task}" th:action="@{/task/}" method="post">
-    <div class="task-window details">
-        <div class="task-header">
+    <div class="window details">
+        <div class="window-header">
             <div th:if="${task.id != null}" class="title">Edit task</div>
             <div th:if="${task.id == null}" class="title">Add task</div>
             <a href="/" class="close-button pointer">&times;</a>
         </div>
-        <div class="task-body">
+        <div class="window-body">
             <input type="hidden" name="id" th:value="${task.id}"/>
             <input type="hidden" name="startDate" th:value="${task.startDate}"/>
             <div class="field">

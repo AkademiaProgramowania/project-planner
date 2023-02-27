@@ -125,30 +125,29 @@ header {
     background-color: rgba(232,219,212);
 }
 
-.task-window.details {
+.window.details {
     position: absolute;
     top: 50%;
     left: 50%;
-    z-index: 10;
     width: 600px;
     padding: 20px 0px;
     transform: translate(-50%, -50%);
     background-color: white;
 }
 
-.task-header {
-    padding: 10px 20px;
+.window-header {
+    padding: 20px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.task-header .title {
+.window-header .title {
     font-size: 1.6rem;
     font-weight: bold;
 }
 
-.task-header .close-button {
+.window-header .close-button {
     border:none;
     background:none;
     font-size:1.6rem;
@@ -156,26 +155,26 @@ header {
     transition: all 0.3s ease 0s;
 }
 
-.task-header .close-button:hover {
+.window-header .close-button:hover {
     background-color: var(--hover-color)
 }
 
-.task-body {
+.window-body {
     font-size: 1.4rem;
     padding: 20px 20px;
     display: flex;
     flex-direction: column;
 }
 
-.task-body .field {
+.window-body .field {
     padding: 10px 0px;
 }
-.task-body .submit-container {
+.window-body .submit-container {
     text-align: end;
     padding: 20px 0px;
 }
 
-.task-body .submit-container .submit-button {
+.window-body .submit-container .submit-button {
     background-color: rgba(191, 161, 129, 1);
     padding: 10px;
     font-size: 1.4rem;
@@ -183,7 +182,7 @@ header {
     border: none;
 }
 
-.task-body .submit-container .cancel {
+.window-body .submit-container .cancel {
     background-color: transparent;
     padding: 10px;
     font-size: 1.4rem;
@@ -191,15 +190,15 @@ header {
     border: none;
 }
 
-.task-body .submit-container .submit-button:hover {
+.window-body .submit-container .submit-button:hover {
     background-color: var(--hover-color);
 }
 
-.task-body .submit-container .cancel:hover {
+.window-body .submit-container .cancel:hover {
     background-color: rgba(191, 161, 129, 0.3);
 }
 
-.task-body .field .input {
+.window-body .field .input {
     width: 100%;
     height: 40px;
     background-color: rgba(191, 161, 129, 0.1);
@@ -209,7 +208,7 @@ header {
 
 }
 
-.task-body .field .task-description {
+.window-body .field .task-description {
     width: 100%;
     height: 250px;
     background-color: rgba(191, 161, 129, 0.1);
@@ -220,7 +219,7 @@ header {
     resize:none;
 }
 
-.task-body .field .input:hover {
+.window-body .field .input:hover {
     background-color: rgba(191, 161, 129, 0.3);
 }
 
