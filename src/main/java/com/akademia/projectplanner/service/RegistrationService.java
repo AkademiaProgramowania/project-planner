@@ -8,12 +8,24 @@ import com.akademia.projectplanner.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Service
 public class RegistrationService {
 
   private UserRepository userRepository;
   private UserMapper userMapper;
+
+  @PostConstruct
+  void addDummyUser() {
+    if (userRepository.count() > 0) {
+      return;
+    }
+    userRepository.save(new UserEntity("Jan", "jan@gmail.com", "password"));
+  }
 
   public void register(UserDto userDto) {
     if (checkMandatoryFieldsInRegistration(userDto)) {
@@ -34,5 +46,11 @@ public class RegistrationService {
 
   private boolean checkPasswordCorrectness(UserDto userDto) {
     return userDto.getPassword().equals(userDto.getPasswordRepeated());
+  }
+
+  public List<UserDto> getAllUsers() {
+    return userRepository.findAll().stream()
+        .map(userEntity -> userMapper.toUserDto(userEntity))
+        .collect(Collectors.toList());
   }
 }

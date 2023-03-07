@@ -1,8 +1,10 @@
 package com.akademia.projectplanner.controller;
 
 import com.akademia.projectplanner.dto.TaskDto;
+import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
 
+import com.akademia.projectplanner.service.RegistrationService;
 import com.akademia.projectplanner.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,18 +16,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.DateTimeException;
+import java.util.List;
 
 @AllArgsConstructor
 @Controller
 public class TaskController {
 
   private TaskService taskService;
+  private RegistrationService registrationService;
 
   @GetMapping("/edit/{taskId}")
   public String getTaskEditPage(@PathVariable("taskId") Long taskId, Model model) {
     try {
       TaskDto taskDto = taskService.getTaskInfo(taskId);
       model.addAttribute("task", taskDto);
+      addUsersAttribute(model);
     } catch (TaskDoesNotExistException e) {
       model.addAttribute("noTaskMessage", e.getMessage());
       return "task";
@@ -37,7 +42,13 @@ public class TaskController {
   public String getAddTaskPage(Model model) {
     TaskDto taskDto = new TaskDto();
     model.addAttribute("task", taskDto);
+    addUsersAttribute(model);
     return "task";
+  }
+
+  private void addUsersAttribute(Model model) {
+    List<UserDto> users = registrationService.getAllUsers();
+    model.addAttribute("users", users);
   }
 
   @PostMapping("/task")
