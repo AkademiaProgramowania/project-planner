@@ -2,13 +2,21 @@ package com.akademia.projectplanner.mapper;
 
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.entity.TaskEntity;
+import com.akademia.projectplanner.entity.UserEntity;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
+import com.akademia.projectplanner.exception.UserDoesNotExistException;
+import com.akademia.projectplanner.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
+@AllArgsConstructor
 public class TaskMapper {
+
+  private UserRepository userRepository;
+
   public TaskEntity toTaskEntity(TaskDto taskDto) {
 
     if (taskDto == null) {
@@ -25,15 +33,21 @@ public class TaskMapper {
       taskEntity.setId(taskDto.getId());
     }
 
-    taskEntity.setDeadline(taskDto.getDeadline());
     taskEntity.setName(taskDto.getName());
     taskEntity.setDescription(taskDto.getDescription());
     taskEntity.setStatus(taskDto.getStatus());
     taskEntity.setDeadline(taskDto.getDeadline());
     taskEntity.setStartDate(taskDto.getStartDate());
-    taskEntity.setUser(taskDto.getUser());
+    taskEntity.setUser(getUser(taskDto.getUserId()));
 
     return taskEntity;
+  }
+
+  private UserEntity getUser(Long id) {
+
+    return userRepository
+        .findById(id)
+        .orElseThrow(() -> new UserDoesNotExistException("User does not exist!"));
   }
 
   public TaskDto toTaskDto(TaskEntity taskEntity) {
@@ -44,14 +58,20 @@ public class TaskMapper {
 
     TaskDto taskDto = new TaskDto();
     taskDto.setId(taskEntity.getId());
-    taskDto.setDeadline(taskEntity.getDeadline());
     taskDto.setName(taskEntity.getName());
     taskDto.setDescription(taskEntity.getDescription());
     taskDto.setStatus(taskEntity.getStatus());
     taskDto.setDeadline(taskEntity.getDeadline());
     taskDto.setStartDate(taskEntity.getStartDate());
-    taskDto.setUser(taskEntity.getUser());
+    taskDto.setUserId(getUserId(taskEntity));
 
     return taskDto;
+  }
+
+  private Long getUserId(TaskEntity taskEntity) {
+    if (taskEntity.getUser() == null) {
+      throw new UserDoesNotExistException("User does not exist!");
+    }
+    return taskEntity.getUser().getId();
   }
 }

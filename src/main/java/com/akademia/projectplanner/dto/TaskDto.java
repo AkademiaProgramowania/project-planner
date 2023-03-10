@@ -1,6 +1,5 @@
 package com.akademia.projectplanner.dto;
 
-import com.akademia.projectplanner.entity.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,5 +23,5 @@ public class TaskDto {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate startDate;
 
-  private UserEntity user;
+  private Long userId;
 }
