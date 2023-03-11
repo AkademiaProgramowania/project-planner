@@ -1,0 +1,8 @@
+package com.akademia.projectplanner.exception;
+
+public class AuthorizationException extends RuntimeException {
+
+  public AuthorizationException(String message) {
+    super(message);
+  }
+}

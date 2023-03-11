@@ -231,3 +231,13 @@ header {
     content:"*";
     color: red;
 }
+
+.account-question {
+    font-size: medium;
+    padding: 10px 0px;
+}
+
+.account-question a {
+    font-size: medium;
+    color: rgba(191, 161, 129, 1);
+}

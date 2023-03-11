@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Project Planner</title>
+
+</head>
+<body>
+
+<form action="/login" method="post">
+    <div class="window details">
+        <div class="window-header">
+            <div class="title">Login</div>
+            <a href="/" class="close-button pointer">&times;</a>
+        </div>
+        <div class="window-body">
+            <div th:text="${fieldsNotFilledMessage}" class="error">error</div>
+            <div th:text="${userDoesNotExistMessage}" class="error">error</div>
+            <div th:text="${passwordIncorrectMessage}" class="error">error</div>
+            <div class="field">
+                <label for="email" class="required">Email</label>
+                <div>
+                    <input th:field="${loginDto.email}" id="email" class="input pointer">
+                </div>
+            </div>
+            <div class="field">
+                <label for="password" class="required">Password</label>
+                <div>
+                    <input th:field="${loginDto.password}" type="password" id="password" class="input pointer">
+                </div>
+            </div>
+            <div class="submit-container">
+
+                <a href="/" class="cancel pointer">Cancel</a>
+                <input class="submit-button pointer" type="submit" value="Login">
+            </div>
+            <div class="account-question">Don't have an account? <a href="registration">Register here</a></div>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
