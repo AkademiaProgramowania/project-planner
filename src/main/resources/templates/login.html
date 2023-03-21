@@ -7,35 +7,69 @@
 </head>
 <body>
 
-<form action="/login" method="post">
-    <div class="window details">
-        <div class="window-header">
-            <div class="title">Login</div>
-            <a href="/" class="close-button pointer">&times;</a>
-        </div>
-        <div class="window-body">
-            <div th:text="${fieldsNotFilledMessage}" class="error">error</div>
-            <div th:text="${userDoesNotExistMessage}" class="error">error</div>
-            <div th:text="${passwordIncorrectMessage}" class="error">error</div>
-            <div class="field">
-                <label for="email" class="required">Email</label>
-                <div>
-                    <input th:field="${loginDto.email}" id="email" class="input pointer">
-                </div>
-            </div>
-            <div class="field">
-                <label for="password" class="required">Password</label>
-                <div>
-                    <input th:field="${loginDto.password}" type="password" id="password" class="input pointer">
-                </div>
-            </div>
-            <div class="submit-container">
+<!--<form  method="post"-->
+<!--       role="form"-->
+<!--       th:action="@{/login}">-->
+<!--    <div class="window details">-->
+<!--        <div class="window-header">-->
+<!--            <div class="title">Login</div>-->
+<!--            <a href="/" class="close-button pointer">&times;</a>-->
+<!--        </div>-->
+<!--        <div class="window-body">-->
+<!--            <div th:text="${fieldsNotFilledMessage}" class="error">error</div>-->
+<!--            <div th:text="${userDoesNotExistMessage}" class="error">error</div>-->
+<!--            <div th:text="${passwordIncorrectMessage}" class="error">error</div>-->
+<!--            <div class="field">-->
+<!--                <label for="email" class="required">Email</label>-->
+<!--                <div>-->
+<!--                    <input th:field="${loginDto.email}" id="email" class="input pointer">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="field">-->
+<!--                <label for="password" class="required">Password</label>-->
+<!--                <div>-->
+<!--                    <input th:field="${loginDto.password}" type="password" id="password" class="input pointer">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="submit-container">-->
 
-                <a href="/" class="cancel pointer">Cancel</a>
-                <input class="submit-button pointer" type="submit" value="Login">
-            </div>
-            <div class="account-question">Don't have an account? <a href="registration">Register here</a></div>
-        </div>
+<!--                <a href="/" class="cancel pointer">Cancel</a>-->
+<!--                <input class="submit-button pointer" type="submit" value="Login">-->
+<!--            </div>-->
+<!--            <div class="account-question">Don't have an account? <a href="registration">Register here</a></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
+<form
+        method="post"
+        role="form"
+        th:action="@{/login}"
+        class="form-horizontal"
+>
+    <div class="form-group mb-3">
+        <label class="control-label"> Email</label>
+        <input
+                type="text"
+                id="username"
+                name="username"
+                class="form-control"
+                placeholder="Enter email address"
+        />
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="control-label"> Password</label>
+        <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="Enter password"
+        />
+    </div>
+    <div class="form-group mb-3">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <span> <a th:href="@{/register}"> Register </a></span>
     </div>
 </form>
 
