@@ -9,20 +9,19 @@ import com.akademia.projectplanner.validation.RegistrationValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class RegistrationService {
 
   private UserRepository userRepository;
   private UserMapper userMapper;
-  private RegistrationValidator registrationValidator;
 
   public void register(UserDto userDto) {
-    if (registrationValidator.checkMandatoryFields(userDto)) {
+    if (RegistrationValidator.checkMandatoryFields(userDto)) {
       throw new IllegalArgumentException("Mandatory fields are not filled in!");
     }
     if (userRepository.existsByEmail(userDto.getEmail())
-        || !registrationValidator.checkPasswordCorrectness(userDto)) {
+        || !RegistrationValidator.checkPasswordCorrectness(userDto)) {
       throw new RegistrationException("Email or password is not correct!");
     }
     UserEntity userEntity = userMapper.toUserEntity(userDto);

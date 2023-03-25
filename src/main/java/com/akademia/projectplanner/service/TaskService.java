@@ -13,19 +13,18 @@ import java.time.DateTimeException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class TaskService {
 
   private TaskMapper taskMapper;
   private TaskRepository taskRepository;
-  private TaskValidator taskValidator;
 
   public void addTask(TaskDto taskDto) {
-    if (taskValidator.checkMandatoryFields(taskDto)) {
+    if (TaskValidator.checkMandatoryFields(taskDto)) {
       throw new IllegalArgumentException("Mandatory fields are not filled in!");
     }
-    if (!taskValidator.checkIfDatesAreValid(taskDto)) {
+    if (!TaskValidator.checkIfDatesAreValid(taskDto)) {
       throw new DateTimeException("Invalid date selected!");
     }
 
