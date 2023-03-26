@@ -50,7 +50,7 @@ header {
     color:var(--hover-color)
 }
 
-.sign-in {
+.standard-button {
     padding: 10px 25px;
     background-color: rgba(191, 161, 129, 1);
     border: none;
@@ -59,7 +59,7 @@ header {
     margin: 20px 0 0 0;
 }
 
-.sign-in:hover{
+.standard-button:hover{
     background-color: var(--hover-color);
 }
 
@@ -226,6 +226,12 @@ header {
 .error {
     color: red;
 }
+.lock-icon {
+    background-image: url("/images/lock.png");
+    background-size: contain;
+    height: 100px;
+    width: 100px;
+}
 
 .required:after {
     content:"*";
@@ -240,4 +246,12 @@ header {
 .account-question a {
     font-size: medium;
     color: rgba(191, 161, 129, 1);
+}
+
+.access-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
