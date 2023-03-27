@@ -34,6 +34,7 @@ public class SecurityConfiguration {
         .authorizeRequests(
             auth -> {
               auth.antMatchers("/css/**", "/images/**").permitAll();
+              auth.antMatchers("/registration", "/console/**").permitAll();
               auth.antMatchers("/")
                   .hasAnyAuthority(
                       Role.ADMINISTRATOR.getRole(),
@@ -41,7 +42,7 @@ public class SecurityConfiguration {
                       Role.DEVELOPER.getRole());
               auth.antMatchers("/add-task", "/edit/**")
                   .hasAnyAuthority(Role.ADMINISTRATOR.getRole(), Role.ARCHITECT.getRole());
-              auth.antMatchers("/registration").permitAll();
+              auth.anyRequest().authenticated();
             })
         .headers()
         .frameOptions()

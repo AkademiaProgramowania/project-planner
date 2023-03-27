@@ -2,7 +2,7 @@ package com.akademia.projectplanner.service;
 
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.entity.UserEntity;
-import com.akademia.projectplanner.exception.AuthorizationException;
+import com.akademia.projectplanner.exception.AuthenticationException;
 import com.akademia.projectplanner.exception.UserDoesNotExistException;
 import com.akademia.projectplanner.mapper.UserMapper;
 import com.akademia.projectplanner.repository.UserRepository;
@@ -32,7 +32,7 @@ public class LoginService {
       throw new UserDoesNotExistException("User with this email does not exist");
     }
     if (!checkPasswordCorrectness(userDto)) {
-      throw new AuthorizationException("Password is incorrect");
+      throw new AuthenticationException("Password is incorrect");
     }
     sessionState.login(userDto);
   }
