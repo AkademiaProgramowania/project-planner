@@ -1,9 +1,9 @@
 package com.akademia.projectplanner.enums;
 
 public enum Role {
-  ADMINISTRATOR("ADMINISTRATOR"),
-  ARCHITECT("ARCHITECT"),
-  DEVELOPER("DEVELOPER");
+  ADMINISTRATOR("ROLE_ADMINISTRATOR"),
+  ARCHITECT("ROLE_ARCHITECT"),
+  DEVELOPER("ROLE_DEVELOPER");
   private String role;
 
   Role(String role) {

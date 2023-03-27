@@ -1,7 +1,7 @@
 package com.akademia.projectplanner.controller;
 
 import com.akademia.projectplanner.dto.UserDto;
-import com.akademia.projectplanner.exception.RegistrationException;
+import com.akademia.projectplanner.exception.AuthenticationException;
 import com.akademia.projectplanner.service.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,10 +30,10 @@ public class RegistrationController {
     } catch (IllegalArgumentException i) {
       model.addAttribute("fieldsNotFilledMessage", i.getMessage());
       return "registration";
-    } catch (RegistrationException e) {
+    } catch (AuthenticationException e) {
       model.addAttribute("registrationErrorMessage", e.getMessage());
       return "registration";
     }
-    return "redirect:/";
+    return "redirect:/login";
   }
 }

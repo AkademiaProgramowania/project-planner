@@ -2,7 +2,7 @@ package com.akademia.projectplanner.service;
 
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.entity.UserEntity;
-import com.akademia.projectplanner.exception.RegistrationException;
+import com.akademia.projectplanner.exception.AuthenticationException;
 import com.akademia.projectplanner.mapper.UserMapper;
 import com.akademia.projectplanner.repository.UserRepository;
 import com.akademia.projectplanner.validation.RegistrationValidator;
@@ -22,7 +22,7 @@ public class RegistrationService {
     }
     if (userRepository.existsByEmail(userDto.getEmail())
         || !RegistrationValidator.checkPasswordCorrectness(userDto)) {
-      throw new RegistrationException("Email or password is not correct!");
+      throw new AuthenticationException("Email or password is not correct!");
     }
     UserEntity userEntity = userMapper.toUserEntity(userDto);
     userRepository.save(userEntity);

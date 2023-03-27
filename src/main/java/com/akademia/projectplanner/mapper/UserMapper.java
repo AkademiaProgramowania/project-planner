@@ -2,7 +2,9 @@ package com.akademia.projectplanner.mapper;
 
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.entity.UserEntity;
+import com.akademia.projectplanner.enums.Role;
 import com.akademia.projectplanner.exception.UserDoesNotExistException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,7 +23,8 @@ public class UserMapper {
 
     userEntity.setName(userDto.getName());
     userEntity.setEmail(userDto.getEmail());
-    userEntity.setPassword(userDto.getPassword());
+    userEntity.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
+    userEntity.setRole(Role.DEVELOPER);
 
     return userEntity;
   }
@@ -37,6 +40,7 @@ public class UserMapper {
     userDto.setName(userEntity.getName());
     userDto.setEmail(userEntity.getEmail());
     userDto.setPassword(userEntity.getPassword());
+    userDto.setRole(userEntity.getRole());
 
     return userDto;
   }

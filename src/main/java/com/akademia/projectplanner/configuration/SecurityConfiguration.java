@@ -1,15 +1,15 @@
 package com.akademia.projectplanner.configuration;
 
 import com.akademia.projectplanner.enums.Role;
+import com.akademia.projectplanner.handler.AccessDeniedHandler;
+import com.akademia.projectplanner.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -19,50 +19,47 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+  @Autowired private UserServiceImpl userService;
+
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
   @Bean
-  public UserDetailsService userDetailsService() {
-    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-    manager.createUser(
-        User.withUsername("administrator")
-            .password(passwordEncoder().encode("adminPass"))
-            .roles(Role.ADMINISTRATOR.getRole())
-            .build());
-    manager.createUser(
-        User.withUsername("architect")
-            .password(passwordEncoder().encode("architectPass"))
-            .roles(Role.ARCHITECT.getRole())
-            .build());
-    manager.createUser(
-        User.withUsername("developer")
-            .password(passwordEncoder().encode("developerPass"))
-            .roles(Role.DEVELOPER.getRole())
-            .build());
-    return manager;
-  }
-
-  @Bean
   public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     return http.csrf()
+        .ignoringAntMatchers("/console/**")
         .disable()
         .authorizeRequests(
             auth -> {
+              auth.antMatchers("/css/**", "/images/**").permitAll();
+              auth.antMatchers("/registration", "/console/**").permitAll();
               auth.antMatchers("/")
-                  .hasAnyRole(
+                  .hasAnyAuthority(
                       Role.ADMINISTRATOR.getRole(),
                       Role.ARCHITECT.getRole(),
                       Role.DEVELOPER.getRole());
-              ;
-              auth.antMatchers("/add-task")
-                  .hasAnyRole(Role.ADMINISTRATOR.getRole(), Role.ARCHITECT.getRole());
-              auth.antMatchers("/edit")
-                  .hasAnyRole(Role.ADMINISTRATOR.getRole(), Role.ARCHITECT.getRole());
+              auth.antMatchers("/add-task", "/edit/**")
+                  .hasAnyAuthority(Role.ADMINISTRATOR.getRole(), Role.ARCHITECT.getRole());
+              auth.anyRequest().authenticated();
             })
-        .formLogin((formLogin) -> formLogin.loginPage("/registration").permitAll())
+        .headers()
+        .frameOptions()
+        .disable()
+        .and()
+        .formLogin(
+            (formLogin) ->
+                formLogin
+                    .loginPage("/login")
+                    .loginProcessingUrl("/login")
+                    .defaultSuccessUrl("/")
+                    .permitAll())
+        .formLogin()
+        .and()
+        .exceptionHandling()
+        .accessDeniedHandler(new AccessDeniedHandler())
+        .and()
         .httpBasic(withDefaults())
         .logout()
         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

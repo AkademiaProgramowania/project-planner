@@ -15,7 +15,7 @@ public class HomeController {
 
   private TaskService taskService;
 
-  @GetMapping("/")
+  @GetMapping({"/", "index"})
   public String getMainPage(Model model) {
     List<TaskDto> allTasks = taskService.getAllTasks();
 

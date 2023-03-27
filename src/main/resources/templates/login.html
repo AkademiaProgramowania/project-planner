@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Project Planner</title>
+</head>
+<body>
+<form
+        method="post"
+        role="form"
+        th:action="@{/login}">
+    <div class="window details">
+
+        <div class="window-header">
+            <div class="title">Login</div>
+            <a href="/" class="close-button pointer">&times;</a>
+        </div>
+
+        <div class="window-body">
+            <div th:if="${param.error}">
+                <div class="error">Invalid credentials</div>
+            </div>
+
+            <div class="field">
+                <label for="username" class="required">Email</label>
+                <div>
+                    <input type="text" id="username" name="username" class="input pointer"/>
+                </div>
+            </div>
+        <div class="field">
+            <label for="password" class="required"> Password</label>
+            <div>
+                <input type="password" id="password" name="password" class="input pointer"/>
+            </div>
+        </div>
+        <div class="submit-container">
+            <a href="/" class="cancel pointer">Cancel</a>
+            <input class="submit-button pointer" type="submit" value="Login">
+        </div>
+        <div class="account-question">Don't have an account? <a th:href="@{/registration}">Register here</a></div>
+    </div>
+    </div>
+    </div>
+</form>
+
+</body>
+</html>
