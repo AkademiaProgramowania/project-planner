@@ -23,7 +23,7 @@ public class RegistrationController {
     return "registration";
   }
 
-  @PostMapping("/registered")
+  @PostMapping("/registration")
   public String register(@ModelAttribute("registrationDto") UserDto userDto, Model model) {
     try {
       registrationService.register(userDto);
