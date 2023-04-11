@@ -210,7 +210,7 @@ header {
 
 .window-body .field .task-description {
     width: 100%;
-    height: 250px;
+    height: 180px;
     background-color: rgba(191, 161, 129, 0.1);
     border: 0.5px solid var(--hover-color);
     transition: all 0.3s ease 0s;
