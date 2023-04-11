@@ -47,6 +47,16 @@
                 </div>
                 <div th:text="${invalidDateMessage}" class="error">error</div>
             </div>
+            <div class="field">
+                <label for="users">User</label>
+                <div>
+                    <select th:field="${task.userId}" class="input pointer" id="users" name="users">
+                        <div th:each="user:${users}">
+                            <option th:value="${user.id}" th:text="${user.name}"></option>
+                        </div>
+                    </select>
+                </div>
+            </div>
             <div class="submit-container">
                 <a href="/" class="cancel pointer">Cancel</a>
                 <input class="submit-button pointer" type="submit" value="Save">

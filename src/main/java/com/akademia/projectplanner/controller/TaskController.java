@@ -3,6 +3,7 @@ package com.akademia.projectplanner.controller;
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
 
+import com.akademia.projectplanner.service.RegistrationService;
 import com.akademia.projectplanner.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,11 @@ import java.time.DateTimeException;
 public class TaskController {
 
   private TaskService taskService;
+  private RegistrationService registrationService;
 
   @GetMapping("/edit/{taskId}")
   public String getTaskEditPage(@PathVariable("taskId") Long taskId, Model model) {
+    addUsersAttribute(model);
     try {
       TaskDto taskDto = taskService.getTaskInfo(taskId);
       model.addAttribute("task", taskDto);
@@ -37,11 +40,13 @@ public class TaskController {
   public String getAddTaskPage(Model model) {
     TaskDto taskDto = new TaskDto();
     model.addAttribute("task", taskDto);
+    addUsersAttribute(model);
     return "task";
   }
 
   @PostMapping("/task")
   public String addOrUpdateTask(@ModelAttribute("task") TaskDto taskDto, Model model) {
+    addUsersAttribute(model);
     try {
       taskService.addTask(taskDto);
     } catch (IllegalArgumentException e) {
@@ -52,5 +57,9 @@ public class TaskController {
       return "task";
     }
     return "redirect:/";
+  }
+
+  private void addUsersAttribute(Model model) {
+    model.addAttribute("users", registrationService.getAllUsers());
   }
 }
