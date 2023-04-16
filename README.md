@@ -15,5 +15,8 @@ Developed by [Juliusz](https://github.com/DrJul), [Agnieszka](https://github.com
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/63641651/229537908-1a3677c7-9109-48be-878c-83d639baf317.png)
+![image](https://user-images.githubusercontent.com/63641651/229537908-1a3677c7-9109-48be-878c-83d639baf317.png)\
 *Home view*
+
+![image](https://user-images.githubusercontent.com/63641651/232285289-ab348cf1-7382-4034-b54b-dea01473988e.png)\
+*Task creation view*
