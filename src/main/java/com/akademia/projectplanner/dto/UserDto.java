@@ -4,6 +4,7 @@ import com.akademia.projectplanner.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
+/** A Data Transfer Object (DTO) for a User. */
 @Getter
 @Setter
 public class UserDto {
