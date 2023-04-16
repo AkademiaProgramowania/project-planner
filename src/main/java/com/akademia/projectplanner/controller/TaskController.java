@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.DateTimeException;
 
+/**
+ * The TaskController handles requests related to displaying the add task form, task creation and
+ * its edition.
+ */
 @AllArgsConstructor
 @Controller
 public class TaskController {
@@ -23,6 +27,15 @@ public class TaskController {
   private TaskService taskService;
   private RegistrationService registrationService;
 
+  /**
+   * Handles GET request for the page with form allowing to edit a task with specific ID. Creates a
+   * new TaskDto object and adds it to the model. Adds all existing users to the view so that task
+   * can be assigned to one of them.
+   *
+   * @param taskId the ID of the task to be edited
+   * @param model the Spring Model object that contains attributes to be passed to the view
+   * @return the name of the view (task.html), otherwise returns the task form with an error message
+   */
   @GetMapping("/edit/{taskId}")
   public String getTaskEditPage(@PathVariable("taskId") Long taskId, Model model) {
     addUsersAttribute(model);
@@ -36,6 +49,14 @@ public class TaskController {
     return "task";
   }
 
+  /**
+   * Handles GET request for the page with form allowing to add a task with specific ID. Creates a
+   * new TaskDto object and adds it to the model. Adds all existing users to the view so that the
+   * task can be assigned to one of them.
+   *
+   * @param model the Spring Model object that contains attributes to be passed to the view
+   * @return the name of the view (task.html) to be rendered by the Spring MVC framework
+   */
   @GetMapping("/add-task")
   public String getAddTaskPage(Model model) {
     TaskDto taskDto = new TaskDto();
@@ -44,6 +65,15 @@ public class TaskController {
     return "task";
   }
 
+  /**
+   * Handles POST request allowing to create a new task or edit a task with specific ID. Adds the
+   * list of users to the model so that the task can be assigned to one of them.
+   *
+   * @param taskDto The task object to add or update
+   * @param model The model object to add attributes to
+   * @return redirect to the home page if successful, otherwise returns the task form with an error
+   *     message
+   */
   @PostMapping("/task")
   public String addOrUpdateTask(@ModelAttribute("task") TaskDto taskDto, Model model) {
     addUsersAttribute(model);
@@ -59,6 +89,12 @@ public class TaskController {
     return "redirect:/";
   }
 
+  /**
+   * Adds all existing users to the edit task form view so that the task can be assigned to one of
+   * them.
+   *
+   * @param model the Spring Model object that contains attributes to be passed to the view
+   */
   private void addUsersAttribute(Model model) {
     model.addAttribute("users", registrationService.getAllUsers());
   }

@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
+/** A Data Transfer Object (DTO) for a task. */
 @Getter
 @Setter
 public class TaskDto {
