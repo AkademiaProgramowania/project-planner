@@ -3,7 +3,7 @@
 ## Description
 Project-planner is an application for managing tasks in projects.
 
-Developed by [Juliusz](https://github.com/DrJul), [Agnieszka](https://github.com/Agnieszkaad77) and [Joanna](https://github.com/fngs101).
+Developed by [Agnieszka](https://github.com/Agnieszkaad77) and [Joanna](https://github.com/fngs101).
 
 ## Features
 - tasks can be assigned to users
