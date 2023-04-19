@@ -1,7 +1,7 @@
 package com.akademia.projectplanner.controller;
 
-import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.service.TaskService;
+import com.akademia.projectplanner.dto.TaskDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
