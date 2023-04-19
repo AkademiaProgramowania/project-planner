@@ -21,10 +21,10 @@ public class TaskService {
   private TaskRepository taskRepository;
 
   public void addTask(TaskDto taskDto) {
-    if (TaskValidator.checkMandatoryFields(taskDto)) {
+    if (TaskValidator.hasBlankNameOrStatus(taskDto)) {
       throw new IllegalArgumentException("Mandatory fields are not filled in!");
     }
-    if (!TaskValidator.checkIfDatesAreValid(taskDto)) {
+    if (!TaskValidator.isDeadlineValid(taskDto)) {
       throw new DateTimeException("Invalid date selected!");
     }
 
