@@ -24,7 +24,7 @@ public class UserMapper {
     userEntity.setName(userDto.getName());
     userEntity.setEmail(userDto.getEmail());
     userEntity.setPassword(new BCryptPasswordEncoder().encode(userDto.getPassword()));
-    userEntity.setRole(Role.DEVELOPER);
+    userEntity.setRole(Role.ADMINISTRATOR);
 
     return userEntity;
   }

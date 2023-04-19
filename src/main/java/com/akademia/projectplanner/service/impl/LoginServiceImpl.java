@@ -1,4 +1,4 @@
-package com.akademia.projectplanner.service;
+package com.akademia.projectplanner.service.impl;
 
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.entity.UserEntity;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class LoginService {
+public class LoginServiceImpl {
   private UserRepository userRepository;
   private UserMapper userMapper;
 
   @Resource(name = "getSessionState")
   private SessionState sessionState;
 
-  public LoginService(UserRepository userRepository, UserMapper userMapper) {
+  public LoginServiceImpl(UserRepository userRepository, UserMapper userMapper) {
     this.userRepository = userRepository;
     this.userMapper = userMapper;
   }

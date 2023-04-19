@@ -1,6 +1,6 @@
 package com.akademia.projectplanner.controller;
 
-import com.akademia.projectplanner.api.RegistrationApi;
+import com.akademia.projectplanner.service.RegistrationService;
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.exception.AuthenticationException;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegistrationController {
 
-  private RegistrationApi registrationApi;
+  private RegistrationService registrationService;
 
   /**
    * Handles GET request for the registration page of the application. Creates a new UserDto object
@@ -48,7 +48,7 @@ public class RegistrationController {
   @PostMapping("/registration")
   public String register(@ModelAttribute("registrationDto") UserDto userDto, Model model) {
     try {
-      registrationApi.register(userDto);
+      registrationService.register(userDto);
     } catch (IllegalArgumentException i) {
       model.addAttribute("fieldsNotFilledMessage", i.getMessage());
       return "registration";
