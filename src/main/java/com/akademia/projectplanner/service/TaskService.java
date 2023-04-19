@@ -1,5 +1,6 @@
 package com.akademia.projectplanner.service;
 
+import com.akademia.projectplanner.api.TaskApi;
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
 import com.akademia.projectplanner.entity.TaskEntity;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class TaskService {
+public class TaskService implements TaskApi {
 
   private TaskMapper taskMapper;
   private TaskRepository taskRepository;

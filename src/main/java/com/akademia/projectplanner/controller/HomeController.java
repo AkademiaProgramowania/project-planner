@@ -1,7 +1,7 @@
 package com.akademia.projectplanner.controller;
 
+import com.akademia.projectplanner.api.TaskApi;
 import com.akademia.projectplanner.dto.TaskDto;
-import com.akademia.projectplanner.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-  private TaskService taskService;
+  private TaskApi taskApi;
 
   /**
    * Handles GET requests for the main page of the application. The method retrieves a list of all
@@ -29,7 +29,7 @@ public class HomeController {
    */
   @GetMapping({"/", "index"})
   public String getMainPage(Model model) {
-    List<TaskDto> allTasks = taskService.getAllTasks();
+    List<TaskDto> allTasks = taskApi.getAllTasks();
 
     model.addAttribute("tasks", allTasks);
 

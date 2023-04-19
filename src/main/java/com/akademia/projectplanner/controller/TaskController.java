@@ -1,10 +1,10 @@
 package com.akademia.projectplanner.controller;
 
+import com.akademia.projectplanner.api.RegistrationApi;
+import com.akademia.projectplanner.api.TaskApi;
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
 
-import com.akademia.projectplanner.service.RegistrationService;
-import com.akademia.projectplanner.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +24,8 @@ import java.time.DateTimeException;
 @Controller
 public class TaskController {
 
-  private TaskService taskService;
-  private RegistrationService registrationService;
+  private TaskApi taskApi;
+  private RegistrationApi registrationApi;
 
   /**
    * Handles GET request for the page with form allowing to edit a task with specific ID. Creates a
@@ -40,7 +40,7 @@ public class TaskController {
   public String getTaskEditPage(@PathVariable("taskId") Long taskId, Model model) {
     addUsersAttribute(model);
     try {
-      TaskDto taskDto = taskService.getTaskInfo(taskId);
+      TaskDto taskDto = taskApi.getTaskInfo(taskId);
       model.addAttribute("task", taskDto);
     } catch (TaskDoesNotExistException e) {
       model.addAttribute("noTaskMessage", e.getMessage());
@@ -78,7 +78,7 @@ public class TaskController {
   public String addOrUpdateTask(@ModelAttribute("task") TaskDto taskDto, Model model) {
     addUsersAttribute(model);
     try {
-      taskService.addTask(taskDto);
+      taskApi.addTask(taskDto);
     } catch (IllegalArgumentException e) {
       model.addAttribute("fieldsNotFilledMessage", e.getMessage());
       return "task";
@@ -96,6 +96,6 @@ public class TaskController {
    * @param model the Spring Model object that contains attributes to be passed to the view
    */
   private void addUsersAttribute(Model model) {
-    model.addAttribute("users", registrationService.getAllUsers());
+    model.addAttribute("users", registrationApi.getAllUsers());
   }
 }

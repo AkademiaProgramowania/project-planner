@@ -1,5 +1,6 @@
 package com.akademia.projectplanner.service;
 
+import com.akademia.projectplanner.api.RegistrationApi;
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.entity.UserEntity;
 import com.akademia.projectplanner.exception.AuthenticationException;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class RegistrationService {
+public class RegistrationService implements RegistrationApi {
 
   private UserRepository userRepository;
   private UserMapper userMapper;
