@@ -1,50 +1,33 @@
 package com.akademia.projectplanner.service;
 
 import com.akademia.projectplanner.dto.TaskDto;
-import com.akademia.projectplanner.exception.TaskDoesNotExistException;
-import com.akademia.projectplanner.entity.TaskEntity;
-import com.akademia.projectplanner.mapper.TaskMapper;
-import com.akademia.projectplanner.repository.TaskRepository;
-import com.akademia.projectplanner.validation.TaskValidator;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import java.time.DateTimeException;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Service
-@AllArgsConstructor
-public class TaskService {
+/** The interface used to communication with TaskServiceImpl. */
+public interface TaskService {
 
-  private TaskMapper taskMapper;
-  private TaskRepository taskRepository;
+  /**
+   * Saves newly created user in the database. Method throws IllegalArgumentException if mandatory
+   * fields are not filled in, or DateTimeException if invalid date is selected.
+   *
+   * @param taskDto The task object to add.
+   */
+  void addTask(TaskDto taskDto);
 
-  public void addTask(TaskDto taskDto) {
-    if (TaskValidator.hasBlankNameOrStatus(taskDto)) {
-      throw new IllegalArgumentException("Mandatory fields are not filled in!");
-    }
-    if (!TaskValidator.isDeadlineValid(taskDto)) {
-      throw new DateTimeException("Invalid date selected!");
-    }
+  /**
+   * Finds all tasks in database and maps TaskEntity to TaskDto.
+   *
+   * @return The list of TaskDto.
+   */
+  List<TaskDto> getAllTasks();
 
-    TaskEntity taskEntity = taskMapper.toTaskEntity(taskDto);
-    taskRepository.save(taskEntity);
-  }
-
-  public List<TaskDto> getAllTasks() {
-
-    return taskRepository.findAll().stream()
-        .map(taskEntity -> taskMapper.toTaskDto(taskEntity))
-        .collect(Collectors.toList());
-  }
-
-  public TaskDto getTaskInfo(Long taskId) {
-    TaskEntity foundTask =
-        taskRepository
-            .findById(taskId)
-            .orElseThrow(() -> new TaskDoesNotExistException("Task does not exist!"));
-
-    return taskMapper.toTaskDto(foundTask);
-  }
+  /**
+   * Finds particular task by id and maps TaskEntity to TaskDto. It throws TaskDoesNotExistException
+   * if task is not found.
+   *
+   * @param taskId the ID of the task to be found.
+   * @return found TaskDto
+   */
+  TaskDto getTaskInfo(Long taskId);
 }

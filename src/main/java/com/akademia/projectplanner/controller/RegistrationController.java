@@ -1,8 +1,8 @@
 package com.akademia.projectplanner.controller;
 
+import com.akademia.projectplanner.service.RegistrationService;
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.exception.AuthenticationException;
-import com.akademia.projectplanner.service.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

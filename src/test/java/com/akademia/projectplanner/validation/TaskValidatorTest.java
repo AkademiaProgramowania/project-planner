@@ -18,48 +18,56 @@ class TaskValidatorTest {
   }
 
   @Test
-  void testTaskNonBlank() {
+  void shouldBeTrueWhenTaskHasStatusAndNameNonBlank() {
     taskDto.setStatus("In progress");
     taskDto.setName("Task number 1");
     assertFalse(TaskValidator.hasBlankNameOrStatus(taskDto));
   }
 
   @Test
-  void testTaskBlankNameAndStatus() {
+  void shouldBeTrueWhenTaskHasBlankNameAndStatus() {
     taskDto.setStatus("");
     taskDto.setName("");
-    assertTrue(TaskValidator.hasBlankNameOrStatus(taskDto));
+
+    TaskDto taskWithWhitespace = new TaskDto();
+    taskWithWhitespace.setStatus(" ");
+    taskWithWhitespace.setName(" ");
+
+    assertAll(
+        "Task has blank name or status",
+        () -> assertTrue(TaskValidator.hasBlankNameOrStatus(taskDto)),
+        () -> assertTrue(TaskValidator.hasBlankNameOrStatus(taskWithWhitespace)));
   }
 
   @Test
-  void testTaskBlankStatusNonBlankName() {
+  void shouldBeTrueWhenTaskHasBlankStatusNonBlankName() {
     taskDto.setStatus("");
     taskDto.setName("Test task");
     assertTrue(TaskValidator.hasBlankNameOrStatus(taskDto));
   }
 
   @Test
-  void testTaskBlankNameNonBlankStatus() {
+  void shouldBeTrueWhenTaskHasBlankNameNonBlankStatus() {
     taskDto.setStatus("In progress");
     taskDto.setName("");
     assertTrue(TaskValidator.hasBlankNameOrStatus(taskDto));
   }
 
   @Test
-  void testIsDeadlineYesterdayValid() {
+  void shouldBeFalseWhenDeadlineYesterday() {
     LocalDate yesterday = LocalDate.now().minusDays(1);
     taskDto.setDeadline(yesterday.toString());
     assertFalse(TaskValidator.isDeadlineValid(taskDto));
   }
 
   @Test
-  void testIsDeadlineEmptyValid() {
+  void shouldBeTrueWhenDeadlineEmpty() {
     taskDto.setDeadline("");
     assertTrue(TaskValidator.isDeadlineValid(taskDto));
   }
 
   @Test
-  void testIsDeadlineTomorrowValid() {
+  void shouldBeTrueWhenDeadlineTomorrow() {
     LocalDate tomorrow = LocalDate.now().plusDays(1);
     taskDto.setDeadline(tomorrow.toString());
     assertTrue(TaskValidator.isDeadlineValid(taskDto));
