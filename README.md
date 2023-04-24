@@ -7,7 +7,7 @@ Developed by [Agnieszka](https://github.com/Agnieszkaad77) and [Joanna](https://
 
 ## Features
 - tasks can be assigned to users
-- three states of a task: **to do**, **in progress**, **in review** and **done**
+- four states of a task: **to do**, **in progress**, **in review** and **done**
 - a possibility to add due date for a task through a calendar attached to the task creation board
 - tasks can have a title and a longer description
 - the app can be accessed on three levels: **administrator**, **architect** and **developer**
