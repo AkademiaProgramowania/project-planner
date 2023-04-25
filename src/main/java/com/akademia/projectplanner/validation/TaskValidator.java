@@ -10,11 +10,11 @@ public final class TaskValidator {
     throw new UnsupportedOperationException("Cannot be instantiated!");
   }
 
-  public static boolean checkMandatoryFields(TaskDto taskDto) {
+  public static boolean hasBlankNameOrStatus(TaskDto taskDto) {
     return taskDto.getName().isBlank() || taskDto.getStatus().isBlank();
   }
 
-  public static boolean checkIfDatesAreValid(TaskDto taskDto) {
+  public static boolean isDeadlineValid(TaskDto taskDto) {
     return taskDto.getDeadline().isBlank()
         || LocalDate.now().isBefore(LocalDate.parse(taskDto.getDeadline()));
   }
