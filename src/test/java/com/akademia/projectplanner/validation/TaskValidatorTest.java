@@ -1,6 +1,7 @@
 package com.akademia.projectplanner.validation;
 
 import com.akademia.projectplanner.dto.TaskDto;
+import com.akademia.projectplanner.enums.StatusEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class TaskValidatorTest {
   @Test
   void shouldBeTrueWhenTaskHasStatusAndNameNonBlank() {
     //given
-    taskDto.setStatus("In progress");
+    taskDto.setStatus(StatusEnum.IN_PROGRESS.getStatus());
     taskDto.setName("Task number 1");
 
     //when
@@ -65,7 +66,7 @@ class TaskValidatorTest {
   @Test
   void shouldBeTrueWhenTaskHasBlankNameNonBlankStatus() {
     //given
-    taskDto.setStatus("In progress");
+    taskDto.setStatus(StatusEnum.IN_PROGRESS.getStatus());
     taskDto.setName("");
 
     //when
