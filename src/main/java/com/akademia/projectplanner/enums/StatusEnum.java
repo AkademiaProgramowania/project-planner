@@ -1,10 +1,10 @@
 package com.akademia.projectplanner.enums;
 
 public enum StatusEnum {
-    TO_DO("To do"),
-    IN_PROGRESS("In progress"),
-    IN_REVIEW("In review"),
-    DONE("Done");
+    TO_DO("toDo"),
+    IN_PROGRESS("inProgress"),
+    IN_REVIEW("inReview"),
+    DONE("done");
     private String status;
 
     StatusEnum(String status) {
