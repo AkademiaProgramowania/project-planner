@@ -10,8 +10,8 @@ public final class TaskValidator {
     throw new UnsupportedOperationException("Cannot be instantiated!");
   }
 
-  public static boolean hasBlankNameOrStatus(TaskDto taskDto) {
-    return taskDto.getName().isBlank() || taskDto.getStatus().isBlank();
+  public static boolean hasBlankName(TaskDto taskDto) {
+    return taskDto.getName().isBlank();
   }
 
   public static boolean isDeadlineValid(TaskDto taskDto) {

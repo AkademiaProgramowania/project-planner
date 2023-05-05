@@ -19,7 +19,7 @@
     <div class="status-cards-todo">
         <h1>To do</h1>
         <ul>
-            <div th:each="task:${tasks}" th:if="${task.status == T(com.akademia.projectplanner.enums.StatusEnum).TO_DO.getStatus()}">
+            <div th:each="task:${tasks}" th:if="${task.statusEnum == T(com.akademia.projectplanner.enums.StatusEnum).TO_DO}">
                 <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
@@ -30,7 +30,7 @@
     <div class="status-cards-inprogress">
         <h1>In progress</h1>
         <ul>
-            <div th:each="task:${tasks}" th:if="${task.status == T(com.akademia.projectplanner.enums.StatusEnum).IN_PROGRESS.getStatus()}">
+            <div th:each="task:${tasks}" th:if="${task.statusEnum == T(com.akademia.projectplanner.enums.StatusEnum).IN_PROGRESS}">
                 <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
@@ -41,7 +41,7 @@
     <div class="status-cards-inreview">
         <h1>In review</h1>
         <ul class="list-items-inreview">
-            <div th:each="task:${tasks}" th:if="${task.status == T(com.akademia.projectplanner.enums.StatusEnum).IN_REVIEW.getStatus()}">
+            <div th:each="task:${tasks}" th:if="${task.statusEnum == T(com.akademia.projectplanner.enums.StatusEnum).IN_REVIEW}">
                 <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>
@@ -52,7 +52,7 @@
     <div class="status-cards-done">
         <h1>Done</h1>
         <ul class="list-items-done">
-            <div th:each="task:${tasks}" th:if="${task.status == T(com.akademia.projectplanner.enums.StatusEnum).DONE.getStatus()}">
+            <div th:each="task:${tasks}" th:if="${task.statusEnum == T(com.akademia.projectplanner.enums.StatusEnum).DONE}">
                 <a th:href="@{'/edit/' + ${task.id}}">
                     <li th:text="${task.name}" class="pointer">
                     </li>

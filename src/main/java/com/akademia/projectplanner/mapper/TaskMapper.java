@@ -35,7 +35,7 @@ public class TaskMapper {
 
     taskEntity.setName(taskDto.getName());
     taskEntity.setDescription(taskDto.getDescription());
-    taskEntity.setStatus(taskDto.getStatus());
+    taskEntity.setStatusEnum(taskDto.getStatusEnum());
     taskEntity.setDeadline(taskDto.getDeadline());
     taskEntity.setStartDate(taskDto.getStartDate());
     taskEntity.setUser(getUser(taskDto.getUserId()));
@@ -60,7 +60,7 @@ public class TaskMapper {
     taskDto.setId(taskEntity.getId());
     taskDto.setName(taskEntity.getName());
     taskDto.setDescription(taskEntity.getDescription());
-    taskDto.setStatus(taskEntity.getStatus());
+    taskDto.setStatusEnum(taskEntity.getStatusEnum());
     taskDto.setDeadline(taskEntity.getDeadline());
     taskDto.setStartDate(taskEntity.getStartDate());
     taskDto.setUserId(getUserId(taskEntity));

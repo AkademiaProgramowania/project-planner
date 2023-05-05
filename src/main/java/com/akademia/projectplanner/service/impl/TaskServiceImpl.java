@@ -22,7 +22,7 @@ public class TaskServiceImpl implements TaskService {
   private TaskRepository taskRepository;
 
   public void addTask(TaskDto taskDto) {
-    if (TaskValidator.hasBlankNameOrStatus(taskDto)) {
+    if (TaskValidator.hasBlankName(taskDto)) {
       throw new IllegalArgumentException("Mandatory fields are not filled in!");
     }
     if (!TaskValidator.isDeadlineValid(taskDto)) {
