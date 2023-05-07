@@ -1,7 +1,6 @@
 package com.akademia.projectplanner.validation;
 
 import com.akademia.projectplanner.dto.TaskDto;
-import com.akademia.projectplanner.enums.StatusEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package com.akademia.projectplanner.entity;
 
-import com.akademia.projectplanner.enums.StatusEnum;
+import com.akademia.projectplanner.enums.Status;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,7 +26,7 @@ public class TaskEntity {
   private String name;
 
   @Enumerated(EnumType.STRING)
-  private StatusEnum statusEnum;
+  private Status status;
 
   private String description;
   private LocalDate startDate;
@@ -39,13 +39,13 @@ public class TaskEntity {
    * Creates a new task entity with the specified properties.
    *
    * @param name the name of the task
-   * @param statusEnum the status of the task
+   * @param status the status of the task
    * @param description the description of the task
    * @param deadline the deadline of the task
    */
-  public TaskEntity(String name, StatusEnum statusEnum, String description, String deadline) {
+  public TaskEntity(String name, Status status, String description, String deadline) {
     this.name = name;
-    this.statusEnum = statusEnum;
+    this.status = status;
     this.description = description;
     this.deadline = deadline;
     this.startDate = LocalDate.now();

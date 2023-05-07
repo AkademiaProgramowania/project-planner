@@ -1,6 +1,6 @@
 package com.akademia.projectplanner.dto;
 
-import com.akademia.projectplanner.enums.StatusEnum;
+import com.akademia.projectplanner.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,7 +18,7 @@ public class TaskDto {
   @NotEmpty(message = "Task name cannot be empty!")
   private String name;
 
-  private StatusEnum statusEnum;
+  private Status status;
   private String description;
   private String deadline;
 
