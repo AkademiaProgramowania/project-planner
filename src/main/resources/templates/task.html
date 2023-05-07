@@ -27,10 +27,10 @@
                 <label for="status">Status</label>
                 <div>
                     <select th:field="${task.status}" class="input pointer" id="status" name="status">
-                        <option value="toDo">To do</option>
-                        <option value="inReview">In review</option>
-                        <option value="inProgress">In progress</option>
-                        <option value="done">Done</option>
+                        <option th:value="${T(com.akademia.projectplanner.enums.Status).TO_DO}">To do</option>
+                        <option th:value="${T(com.akademia.projectplanner.enums.Status).IN_PROGRESS}">In progress</option>
+                        <option th:value="${T(com.akademia.projectplanner.enums.Status).IN_REVIEW}">In review</option>
+                        <option th:value="${T(com.akademia.projectplanner.enums.Status).DONE}">Done</option>
                     </select>
                 </div>
             </div>

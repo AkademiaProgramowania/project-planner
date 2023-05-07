@@ -18,98 +18,52 @@ class TaskValidatorTest {
   }
 
   @Test
-  void shouldBeTrueWhenTaskHasStatusAndNameNonBlank() {
-    //given
-    taskDto.setStatus("In progress");
+  void shouldBeFalseWhenTaskHasNameNonBlank() {
+    // given
     taskDto.setName("Task number 1");
 
-    //when
-    boolean result = TaskValidator.hasBlankNameOrStatus(taskDto);
+    // when
+    boolean result = TaskValidator.hasBlankName(taskDto);
 
-    //then
+    // then
     assertFalse(result);
   }
 
   @Test
-  void shouldBeTrueWhenTaskHasBlankNameAndStatus() {
-    //given
-    taskDto.setStatus("");
-    taskDto.setName("");
-
-    TaskDto taskWithWhitespace = new TaskDto();
-    taskWithWhitespace.setStatus(" ");
-    taskWithWhitespace.setName(" ");
-
-    //when
-    boolean result1 = TaskValidator.hasBlankNameOrStatus(taskDto);
-    boolean result2 = TaskValidator.hasBlankNameOrStatus(taskWithWhitespace);
-
-    //then
-    assertTrue(result1);
-    assertTrue(result2);
-  }
-
-  @Test
-  void shouldBeTrueWhenTaskHasBlankStatusNonBlankName() {
-    //given
-    taskDto.setStatus("");
-    taskDto.setName("Test task");
-
-    //when
-    boolean result = TaskValidator.hasBlankNameOrStatus(taskDto);
-
-    //then
-    assertTrue(result);
-  }
-
-  @Test
-  void shouldBeTrueWhenTaskHasBlankNameNonBlankStatus() {
-    //given
-    taskDto.setStatus("In progress");
-    taskDto.setName("");
-
-    //when
-    boolean result = TaskValidator.hasBlankNameOrStatus(taskDto);
-
-    //then
-    assertTrue(result);
-  }
-
-  @Test
   void shouldBeFalseWhenDeadlineYesterday() {
-    //given
+    // given
     LocalDate yesterday = LocalDate.now().minusDays(1);
     taskDto.setDeadline(yesterday.toString());
 
-    //when
+    // when
     boolean result = TaskValidator.isDeadlineValid(taskDto);
 
-    //then
+    // then
     assertFalse(result);
   }
 
   @Test
   void shouldBeTrueWhenDeadlineEmpty() {
-    //given
+    // given
     taskDto.setDeadline("");
 
-    //when
+    // when
     boolean result = TaskValidator.isDeadlineValid(taskDto);
 
-    //then
+    // then
     assertTrue(result);
   }
 
   @Test
   void shouldBeTrueWhenDeadlineTomorrow() {
-    //given
+    // given
     LocalDate tomorrow = LocalDate.now().plusDays(1);
     taskDto.setDeadline(tomorrow.toString());
 
-    //when
+    // when
     boolean result = TaskValidator.isDeadlineValid(taskDto);
 
-    //then
+    // then
     assertTrue(result);
   }
 }
