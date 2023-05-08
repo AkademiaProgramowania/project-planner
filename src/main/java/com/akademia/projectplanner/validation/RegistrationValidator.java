@@ -4,7 +4,7 @@ import com.akademia.projectplanner.dto.UserDto;
 
 public final class RegistrationValidator {
 
-  private RegistrationValidator() {
+  RegistrationValidator() {
     throw new UnsupportedOperationException("Cannot be instantiated!");
   }
 
