@@ -40,14 +40,18 @@ header {
     border-left: solid black 1px;
 }
 
-.navbar-links li * {
+.navbar-links li a {
     transition: all 0.3s ease 0s;
     border: none;
     background-color: inherit;
 }
 
-.navbar-links li *:hover {
-    color:var(--hover-color)
+.navbar-links a:hover {
+    color:var(--hover-color);
+}
+
+.navbar-links span {
+    font-weight: bold;
 }
 
 .standard-button {
