@@ -8,13 +8,15 @@
 <header>
     <nav>
         <ul class="navbar-links">
-            <li class="pointer">LOGO</li>
-            <li><a href="">Home</a></li>
+            <li>Hi, <span th:text="${userName}"></span></li>
             <li><a href="add-task" class="pointer">Add task</a></li>
         </ul>
+
     </nav>
+
     <a href="/logout"><button class="standard-button pointer">Sign out</button></a>
 </header>
+
 <div class="status-cards">
     <div class="status-cards-todo">
         <h1>To do</h1>

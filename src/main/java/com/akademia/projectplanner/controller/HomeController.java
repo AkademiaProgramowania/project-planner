@@ -3,6 +3,8 @@ package com.akademia.projectplanner.controller;
 import com.akademia.projectplanner.service.TaskService;
 import com.akademia.projectplanner.dto.TaskDto;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,9 @@ public class HomeController {
   @GetMapping({"/", "index"})
   public String getMainPage(Model model) {
     List<TaskDto> allTasks = taskService.getAllTasks();
-
+    UserDetails userDetails =
+        (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("userName", userDetails.getUsername());
     model.addAttribute("tasks", allTasks);
 
     return "index";
