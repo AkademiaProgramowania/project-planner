@@ -1,6 +1,7 @@
 package com.akademia.projectplanner.validation;
 
 import com.akademia.projectplanner.dto.UserDto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,27 +10,16 @@ class RegistrationValidatorTest {
 
   private UserDto userDto;
 
-  private void createUserDto() {
+  @BeforeEach
+  void createUserDto() {
     userDto = new UserDto();
     userDto.setPassword("password");
   }
 
   @Test
-  void shouldThrowUnsupportedOperationException() {
+  void shouldReturnFalseWhenFieldsAreNonBlank() {
     // given
-    UnsupportedOperationException exception =
-        assertThrows(UnsupportedOperationException.class, RegistrationValidator::new);
-
-    // then
-    assertEquals("Cannot be instantiated!", exception.getMessage());
-  }
-
-  @Test
-  void shouldAssertFalseWhenRegistrationFieldsAreNonBlank() {
-    // given
-    createUserDto();
-    userDto.setName("username");
-    userDto.setEmail("email@gmail.com");
+    changeUserNameAndEmail("username", "email@gmail.com");
 
     // when
     boolean result = RegistrationValidator.checkMandatoryFields(userDto);
@@ -39,9 +29,32 @@ class RegistrationValidatorTest {
   }
 
   @Test
-  void shouldAssertTrueWhenPasswordCorrect() {
+  void shouldReturnTrueWhenFieldsAreEmpty() {
     // given
-    createUserDto();
+    changeUserNameAndEmail("", "");
+
+    // when
+    boolean result = RegistrationValidator.checkMandatoryFields(userDto);
+
+    // then
+    assertTrue(result);
+  }
+
+  @Test
+  void shouldReturnTrueWhenFieldsAreWhiteSpace() {
+    // given
+    changeUserNameAndEmail(" ", " ");
+
+    // when
+    boolean result = RegistrationValidator.checkMandatoryFields(userDto);
+
+    // then
+    assertTrue(result);
+  }
+
+  @Test
+  void shouldReturnTrueWhenPasswordCorrect() {
+    // given
     userDto.setPasswordRepeated("password");
 
     // when
@@ -49,5 +62,10 @@ class RegistrationValidatorTest {
 
     // then
     assertTrue(result);
+  }
+
+  private void changeUserNameAndEmail(String name, String email) {
+    userDto.setName(name);
+    userDto.setEmail(email);
   }
 }

@@ -4,9 +4,7 @@ import com.akademia.projectplanner.dto.UserDto;
 
 public final class RegistrationValidator {
 
-  RegistrationValidator() {
-    throw new UnsupportedOperationException("Cannot be instantiated!");
-  }
+  private RegistrationValidator() {}
 
   public static boolean checkMandatoryFields(UserDto userDto) {
     return userDto.getName().isBlank()
