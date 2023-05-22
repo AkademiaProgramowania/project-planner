@@ -7,6 +7,7 @@ import com.akademia.projectplanner.enums.Status;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
 import com.akademia.projectplanner.exception.UserDoesNotExistException;
 import com.akademia.projectplanner.repository.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -26,12 +27,18 @@ class TaskMapperTest {
 
   @Mock private UserRepository userRepository;
   @InjectMocks private TaskMapper taskMapper;
+  private AutoCloseable autoCloseable;
 
   @BeforeEach
   void setUp() {
     taskDto = new TaskDto();
     taskEntity = new TaskEntity();
-    MockitoAnnotations.openMocks(this);
+    autoCloseable = MockitoAnnotations.openMocks(this);
+  }
+
+  @AfterEach
+  void cleanup() throws Exception {
+    autoCloseable.close();
   }
 
   @Test
