@@ -6,7 +6,6 @@ import com.akademia.projectplanner.exception.AuthenticationException;
 import com.akademia.projectplanner.exception.UserDoesNotExistException;
 import com.akademia.projectplanner.mapper.UserMapper;
 import com.akademia.projectplanner.repository.UserRepository;
-import com.akademia.projectplanner.state.SessionState;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,8 +15,6 @@ public class LoginServiceImpl {
   private UserRepository userRepository;
   private UserMapper userMapper;
 
-  @Resource(name = "getSessionState")
-  private SessionState sessionState;
 
   public LoginServiceImpl(UserRepository userRepository, UserMapper userMapper) {
     this.userRepository = userRepository;
@@ -34,7 +31,7 @@ public class LoginServiceImpl {
     if (!checkPasswordCorrectness(userDto)) {
       throw new AuthenticationException("Password is incorrect");
     }
-    sessionState.login(userDto);
+
   }
 
   private boolean checkMandatoryFieldsInLogin(UserDto userDto) {
