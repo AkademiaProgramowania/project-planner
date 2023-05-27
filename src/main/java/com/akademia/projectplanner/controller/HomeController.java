@@ -1,5 +1,6 @@
 package com.akademia.projectplanner.controller;
 
+import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.service.TaskService;
 import com.akademia.projectplanner.dto.TaskDto;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller class that handles requests for the home page of the application. The rendered view of
@@ -31,11 +33,13 @@ public class HomeController {
    */
   @GetMapping({"/", "index"})
   public String getMainPage(Model model) {
+
     List<TaskDto> allTasks = taskService.getAllTasks();
+    Map<TaskDto, UserDto> taskUserMap = taskService.getTaskUserMap(allTasks);
     UserDetails userDetails =
         (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     model.addAttribute("userName", userDetails.getUsername());
-    model.addAttribute("tasks", allTasks);
+    model.addAttribute("taskUserMap", taskUserMap);
 
     return "index";
   }

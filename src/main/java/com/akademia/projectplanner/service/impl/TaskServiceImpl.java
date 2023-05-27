@@ -1,5 +1,10 @@
 package com.akademia.projectplanner.service.impl;
 
+import com.akademia.projectplanner.dto.UserDto;
+import com.akademia.projectplanner.entity.UserEntity;
+import com.akademia.projectplanner.exception.UserDoesNotExistException;
+import com.akademia.projectplanner.mapper.UserMapper;
+import com.akademia.projectplanner.repository.UserRepository;
 import com.akademia.projectplanner.service.TaskService;
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
@@ -11,7 +16,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.DateTimeException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +27,8 @@ public class TaskServiceImpl implements TaskService {
 
   private TaskMapper taskMapper;
   private TaskRepository taskRepository;
+  private UserRepository userRepository;
+  private UserMapper userMapper;
 
   public void addTask(TaskDto taskDto) {
     if (TaskValidator.hasBlankName(taskDto)) {
@@ -47,5 +56,19 @@ public class TaskServiceImpl implements TaskService {
             .orElseThrow(() -> new TaskDoesNotExistException("Task does not exist!"));
 
     return taskMapper.toTaskDto(foundTask);
+  }
+
+  public Map<TaskDto, UserDto> getTaskUserMap(List<TaskDto> taskList) {
+    Map<TaskDto, UserDto> taskUserMap = new HashMap<>();
+    for (TaskDto taskDto : taskList) {
+      Long userId = taskDto.getUserId();
+      UserEntity userEntity =
+          userRepository
+              .findById(userId)
+              .orElseThrow(() -> new UserDoesNotExistException("User does not exist!"));
+      UserDto userDto = userMapper.toUserDto(userEntity);
+      taskUserMap.put(taskDto, userDto);
+    }
+    return taskUserMap;
   }
 }
