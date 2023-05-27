@@ -8,13 +8,10 @@ import com.akademia.projectplanner.mapper.UserMapper;
 import com.akademia.projectplanner.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
 @Service
 public class LoginServiceImpl {
   private UserRepository userRepository;
   private UserMapper userMapper;
-
 
   public LoginServiceImpl(UserRepository userRepository, UserMapper userMapper) {
     this.userRepository = userRepository;
@@ -31,7 +28,6 @@ public class LoginServiceImpl {
     if (!checkPasswordCorrectness(userDto)) {
       throw new AuthenticationException("Password is incorrect");
     }
-
   }
 
   private boolean checkMandatoryFieldsInLogin(UserDto userDto) {
