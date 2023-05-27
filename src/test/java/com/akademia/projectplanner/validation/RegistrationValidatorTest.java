@@ -13,13 +13,14 @@ class RegistrationValidatorTest {
   @BeforeEach
   void createUserDto() {
     userDto = new UserDto();
-    userDto.setPassword("password");
   }
 
   @Test
   void shouldReturnFalseWhenFieldsAreNonBlank() {
     // given
-    changeUserNameAndEmail("username", "email@gmail.com");
+    userDto.setName("username");
+    userDto.setEmail("email@gmail.com");
+    userDto.setPassword("password");
 
     // when
     boolean result = RegistrationValidator.checkMandatoryFields(userDto);
@@ -31,7 +32,9 @@ class RegistrationValidatorTest {
   @Test
   void shouldReturnTrueWhenFieldsAreEmpty() {
     // given
-    changeUserNameAndEmail("", "");
+    userDto.setName("");
+    userDto.setEmail("");
+    userDto.setPassword("");
 
     // when
     boolean result = RegistrationValidator.checkMandatoryFields(userDto);
@@ -43,7 +46,9 @@ class RegistrationValidatorTest {
   @Test
   void shouldReturnTrueWhenFieldsAreWhiteSpace() {
     // given
-    changeUserNameAndEmail(" ", " ");
+    userDto.setName(" ");
+    userDto.setEmail(" ");
+    userDto.setPassword(" ");
 
     // when
     boolean result = RegistrationValidator.checkMandatoryFields(userDto);
@@ -55,6 +60,7 @@ class RegistrationValidatorTest {
   @Test
   void shouldReturnTrueWhenPasswordCorrect() {
     // given
+    userDto.setPassword("password");
     userDto.setPasswordRepeated("password");
 
     // when
@@ -62,10 +68,5 @@ class RegistrationValidatorTest {
 
     // then
     assertTrue(result);
-  }
-
-  private void changeUserNameAndEmail(String name, String email) {
-    userDto.setName(name);
-    userDto.setEmail(email);
   }
 }
