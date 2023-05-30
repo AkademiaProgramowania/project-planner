@@ -58,16 +58,16 @@ public class TaskServiceImpl implements TaskService {
     return taskMapper.toTaskDto(foundTask);
   }
 
-  public Map<TaskDto, UserDto> getTaskUserMap(List<TaskDto> taskList) {
-    Map<TaskDto, UserDto> taskUserMap = new HashMap<>();
+  public Map<TaskDto, String> createTaskEmailMap(List<TaskDto> taskList) {
+    Map<TaskDto, String> taskUserMap = new HashMap<>();
     for (TaskDto taskDto : taskList) {
       Long userId = taskDto.getUserId();
       UserEntity userEntity =
           userRepository
               .findById(userId)
               .orElseThrow(() -> new UserDoesNotExistException("User does not exist!"));
-      UserDto userDto = userMapper.toUserDto(userEntity);
-      taskUserMap.put(taskDto, userDto);
+      String email = userEntity.getEmail();
+      taskUserMap.put(taskDto, email);
     }
     return taskUserMap;
   }

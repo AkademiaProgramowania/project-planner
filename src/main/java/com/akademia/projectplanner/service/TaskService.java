@@ -1,7 +1,6 @@
 package com.akademia.projectplanner.service;
 
 import com.akademia.projectplanner.dto.TaskDto;
-import com.akademia.projectplanner.dto.UserDto;
 
 import java.util.List;
 import java.util.Map;
@@ -39,5 +38,5 @@ public interface TaskService {
    * @param taskList the list of created tasks Dto.
    * @return a map containing existing task and its corresponding user.
    */
-  Map<TaskDto, UserDto> getTaskUserMap(List<TaskDto> taskList);
+  Map<TaskDto, String> createTaskEmailMap(List<TaskDto> taskList);
 }

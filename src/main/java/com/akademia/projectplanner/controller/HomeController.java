@@ -1,6 +1,5 @@
 package com.akademia.projectplanner.controller;
 
-import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.service.TaskService;
 import com.akademia.projectplanner.dto.TaskDto;
 import lombok.AllArgsConstructor;
@@ -35,11 +34,11 @@ public class HomeController {
   public String getMainPage(Model model) {
 
     List<TaskDto> allTasks = taskService.getAllTasks();
-    Map<TaskDto, UserDto> taskUserMap = taskService.getTaskUserMap(allTasks);
+    Map<TaskDto, String> taskWithEmails = taskService.createTaskEmailMap(allTasks);
     UserDetails userDetails =
         (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     model.addAttribute("userName", userDetails.getUsername());
-    model.addAttribute("taskUserMap", taskUserMap);
+    model.addAttribute("taskWithEmails", taskWithEmails);
 
     return "index";
   }
