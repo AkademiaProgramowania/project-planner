@@ -1,6 +1,6 @@
 package com.akademia.projectplanner.service.impl;
 
-import com.akademia.projectplanner.enums.Message;
+import com.akademia.projectplanner.enums.ExceptionMessage;
 import com.akademia.projectplanner.service.TaskService;
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
@@ -24,10 +24,10 @@ public class TaskServiceImpl implements TaskService {
 
   public void addTask(TaskDto taskDto) {
     if (TaskValidator.hasBlankName(taskDto)) {
-      throw new IllegalArgumentException(Message.FIELDS_NOT_FILLED.getMessage());
+      throw new IllegalArgumentException(ExceptionMessage.FIELDS_NOT_FILLED.getExceptionText());
     }
     if (!TaskValidator.isDeadlineValid(taskDto)) {
-      throw new DateTimeException(Message.INVALID_DATE.getMessage());
+      throw new DateTimeException(ExceptionMessage.INVALID_DATE.getExceptionText());
     }
 
     TaskEntity taskEntity = taskMapper.toTaskEntity(taskDto);
@@ -46,7 +46,9 @@ public class TaskServiceImpl implements TaskService {
         taskRepository
             .findById(taskId)
             .orElseThrow(
-                () -> new TaskDoesNotExistException(Message.TASK_DOES_NOT_EXIST.getMessage()));
+                () ->
+                    new TaskDoesNotExistException(
+                        ExceptionMessage.TASK_DOES_NOT_EXIST.getExceptionText()));
 
     return taskMapper.toTaskDto(foundTask);
   }

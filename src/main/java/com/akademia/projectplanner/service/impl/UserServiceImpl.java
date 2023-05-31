@@ -1,7 +1,7 @@
 package com.akademia.projectplanner.service.impl;
 
 import com.akademia.projectplanner.entity.UserEntity;
-import com.akademia.projectplanner.enums.Message;
+import com.akademia.projectplanner.enums.ExceptionMessage;
 import com.akademia.projectplanner.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     UserEntity userEntity = userRepository.findByEmail(username);
     if (userEntity == null) {
-      throw new UsernameNotFoundException(Message.NOT_FOUND.getMessage());
+      throw new UsernameNotFoundException(ExceptionMessage.NOT_FOUND.getExceptionText());
     }
     return User.withUsername(userEntity.getEmail())
         .password(userEntity.getPassword())

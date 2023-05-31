@@ -6,7 +6,7 @@ import lombok.Getter;
 /** An enumeration of messages that are displayed when throwing an exception. */
 @AllArgsConstructor
 @Getter
-public enum Message {
+public enum ExceptionMessage {
   FIELDS_NOT_FILLED("Mandatory fields are not filled in!"),
   FIELDS_NOT_CORRECT("Email or password is not correct!"),
   INVALID_DATE("Invalid date selected!"),
@@ -14,5 +14,5 @@ public enum Message {
   USER_DOES_NOT_EXIST("User does not exist!"),
   NOT_FOUND("Not found!");
 
-  private String message;
+  private String exceptionText;
 }

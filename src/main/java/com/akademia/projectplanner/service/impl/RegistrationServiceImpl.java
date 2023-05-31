@@ -1,6 +1,6 @@
 package com.akademia.projectplanner.service.impl;
 
-import com.akademia.projectplanner.enums.Message;
+import com.akademia.projectplanner.enums.ExceptionMessage;
 import com.akademia.projectplanner.service.RegistrationService;
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.entity.UserEntity;
@@ -23,11 +23,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 
   public void register(UserDto userDto) {
     if (RegistrationValidator.checkMandatoryFields(userDto)) {
-      throw new IllegalArgumentException(Message.FIELDS_NOT_FILLED.getMessage());
+      throw new IllegalArgumentException(ExceptionMessage.FIELDS_NOT_FILLED.getExceptionText());
     }
     if (userRepository.existsByEmail(userDto.getEmail())
         || !RegistrationValidator.checkPasswordCorrectness(userDto)) {
-      throw new AuthenticationException(Message.FIELDS_NOT_CORRECT.getMessage());
+      throw new AuthenticationException(ExceptionMessage.FIELDS_NOT_CORRECT.getExceptionText());
     }
     UserEntity userEntity = userMapper.toUserEntity(userDto);
     userRepository.save(userEntity);
