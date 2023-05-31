@@ -38,5 +38,5 @@ public interface TaskService {
    * @param taskList the list of created tasks Dto.
    * @return a map containing existing task and its corresponding user.
    */
-  Map<TaskDto, String> createTaskEmailMap(List<TaskDto> taskList);
+  Map<TaskDto, String> createTasksEmailsMap(List<TaskDto> taskList);
 }

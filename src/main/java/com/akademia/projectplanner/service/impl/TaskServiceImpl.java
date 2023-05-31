@@ -58,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
     return taskMapper.toTaskDto(foundTask);
   }
 
-  public Map<TaskDto, String> createTaskEmailMap(List<TaskDto> taskList) {
+  public Map<TaskDto, String> createTasksEmailsMap(List<TaskDto> taskList) {
     Map<TaskDto, String> taskUserMap = new HashMap<>();
     for (TaskDto taskDto : taskList) {
       Long userId = taskDto.getUserId();

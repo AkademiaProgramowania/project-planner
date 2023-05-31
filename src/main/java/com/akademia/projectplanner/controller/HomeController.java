@@ -34,11 +34,11 @@ public class HomeController {
   public String getMainPage(Model model) {
 
     List<TaskDto> allTasks = taskService.getAllTasks();
-    Map<TaskDto, String> taskWithEmails = taskService.createTaskEmailMap(allTasks);
+    Map<TaskDto, String> tasksWithEmails = taskService.createTasksEmailsMap(allTasks);
     UserDetails userDetails =
         (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     model.addAttribute("userName", userDetails.getUsername());
-    model.addAttribute("taskWithEmails", taskWithEmails);
+    model.addAttribute("tasksWithEmails", tasksWithEmails);
 
     return "index";
   }

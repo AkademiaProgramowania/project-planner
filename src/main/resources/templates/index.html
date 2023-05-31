@@ -21,7 +21,7 @@
     <div class="status-cards-todo">
         <h1>To do</h1>
         <ul>
-            <div th:each="entry : ${taskWithEmails}" th:if="${entry.key.status == T(com.akademia.projectplanner.enums.Status).TO_DO}">
+            <div th:each="entry : ${tasksWithEmails}" th:if="${entry.key.status == T(com.akademia.projectplanner.enums.Status).TO_DO}">
                 <a th:href="@{'/edit/' + ${entry.key.id}}">
                     <li class="pointer">
                         <span th:text="${entry.key.name}" class="task-name"></span>
@@ -34,7 +34,7 @@
     <div class="status-cards-inprogress">
         <h1>In progress</h1>
         <ul>
-            <div th:each="entry : ${taskWithEmails}" th:if="${entry.key.status == T(com.akademia.projectplanner.enums.Status).IN_PROGRESS}">
+            <div th:each="entry : ${tasksWithEmails}" th:if="${entry.key.status == T(com.akademia.projectplanner.enums.Status).IN_PROGRESS}">
                 <a th:href="@{'/edit/' + ${entry.key.id}}">
                     <li class="pointer">
                         <span th:text="${entry.key.name}" class="task-name"></span>
@@ -47,7 +47,7 @@
     <div class="status-cards-inreview">
         <h1>In review</h1>
         <ul class="list-items-inreview">
-            <div th:each="entry : ${taskWithEmails}" th:if="${entry.key.status == T(com.akademia.projectplanner.enums.Status).IN_REVIEW}">
+            <div th:each="entry : ${tasksWithEmails}" th:if="${entry.key.status == T(com.akademia.projectplanner.enums.Status).IN_REVIEW}">
                 <a th:href="@{'/edit/' + ${entry.key.id}}">
                     <li class="pointer">
                         <span th:text="${entry.key.name}" class="task-name"></span>
@@ -60,7 +60,7 @@
     <div class="status-cards-done">
         <h1>Done</h1>
         <ul class="list-items-done">
-            <div th:each="entry : ${taskWithEmails}" th:if="${entry.key.status == T(com.akademia.projectplanner.enums.Status).DONE}">
+            <div th:each="entry : ${tasksWithEmails}" th:if="${entry.key.status == T(com.akademia.projectplanner.enums.Status).DONE}">
                 <a th:href="@{'/edit/' + ${entry.key.id}}">
                     <li class="pointer">
                         <span th:text="${entry.key.name}" class="task-name"></span>
