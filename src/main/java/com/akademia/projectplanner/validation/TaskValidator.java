@@ -6,9 +6,7 @@ import java.time.LocalDate;
 
 public final class TaskValidator {
 
-  private TaskValidator() {
-    throw new UnsupportedOperationException("Cannot be instantiated!");
-  }
+  private TaskValidator() {}
 
   public static boolean hasBlankName(TaskDto taskDto) {
     return taskDto.getName().isBlank();

@@ -3,6 +3,7 @@ package com.akademia.projectplanner.mapper;
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.entity.TaskEntity;
 import com.akademia.projectplanner.entity.UserEntity;
+import com.akademia.projectplanner.enums.ExceptionMessage;
 import com.akademia.projectplanner.exception.TaskDoesNotExistException;
 import com.akademia.projectplanner.exception.UserDoesNotExistException;
 import com.akademia.projectplanner.repository.UserRepository;
@@ -14,13 +15,12 @@ import java.time.LocalDate;
 @Component
 @AllArgsConstructor
 public class TaskMapper {
-
   private UserRepository userRepository;
 
   public TaskEntity toTaskEntity(TaskDto taskDto) {
 
     if (taskDto == null) {
-      throw new TaskDoesNotExistException("Task does not exist!");
+      throw new TaskDoesNotExistException(ExceptionMessage.TASK_DOES_NOT_EXIST.getExceptionText());
     }
 
     TaskEntity taskEntity = new TaskEntity();
@@ -47,13 +47,16 @@ public class TaskMapper {
 
     return userRepository
         .findById(id)
-        .orElseThrow(() -> new UserDoesNotExistException("User does not exist!"));
+        .orElseThrow(
+            () ->
+                new UserDoesNotExistException(
+                    ExceptionMessage.USER_DOES_NOT_EXIST.getExceptionText()));
   }
 
   public TaskDto toTaskDto(TaskEntity taskEntity) {
 
     if (taskEntity == null) {
-      throw new TaskDoesNotExistException("Task does not exist!");
+      throw new TaskDoesNotExistException(ExceptionMessage.TASK_DOES_NOT_EXIST.getExceptionText());
     }
 
     TaskDto taskDto = new TaskDto();
@@ -70,7 +73,7 @@ public class TaskMapper {
 
   private Long getUserId(TaskEntity taskEntity) {
     if (taskEntity.getUser() == null) {
-      throw new UserDoesNotExistException("User does not exist!");
+      throw new UserDoesNotExistException(ExceptionMessage.USER_DOES_NOT_EXIST.getExceptionText());
     }
     return taskEntity.getUser().getId();
   }
