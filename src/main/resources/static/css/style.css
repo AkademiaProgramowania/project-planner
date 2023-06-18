@@ -259,3 +259,13 @@ header {
   justify-content: center;
   align-items: center;
 }
+.task-name {
+    display: block;
+}
+.task-assignee {
+    color: rgb(182, 121, 87);
+    font-size: 1rem;
+}
+.task-assignee::before {
+    content: "Assignee: ";
+}
