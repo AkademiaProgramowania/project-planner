@@ -67,14 +67,19 @@ public class TaskServiceImpl implements TaskService {
     Map<TaskDto, String> taskUserMap = new HashMap<>();
     for (TaskDto taskDto : taskList) {
       Long userId = taskDto.getUserId();
-      UserEntity userEntity =
-          userRepository
-              .findById(userId)
-              .orElseThrow(
-                  () ->
-                      new UserDoesNotExistException(
-                          ExceptionMessage.USER_DOES_NOT_EXIST.getExceptionText()));
-      String email = userEntity.getEmail();
+      String email;
+      if (userId == null) {
+        email = "unassigned";
+      } else {
+        UserEntity userEntity =
+            userRepository
+                .findById(userId)
+                .orElseThrow(
+                    () ->
+                        new UserDoesNotExistException(
+                            ExceptionMessage.USER_DOES_NOT_EXIST.getExceptionText()));
+        email = userEntity.getEmail();
+      }
       taskUserMap.put(taskDto, email);
     }
     return taskUserMap;

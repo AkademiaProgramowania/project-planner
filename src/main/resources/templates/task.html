@@ -51,7 +51,7 @@
                 <label for="users">User</label>
                 <div>
                     <select th:field="${task.userId}" class="input pointer" id="users" name="users">
-                        <option value="">Not Assigned</option>
+                        <option value="">Unassigned</option>
                         <div th:each="user:${users}">
                             <option th:value="${user.id}" th:text="${user.name}"></option>
                         </div>
