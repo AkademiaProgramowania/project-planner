@@ -71,9 +71,12 @@ class TaskMapperTest {
   }
 
   @Test
-  void shouldThrowUserExceptionWhenTaskDtoUserNull() {
+  void shouldThrowUserExceptionWhenTaskDtoUserIdNotFound() {
     // given
-    taskDto.setUserId(null);
+    taskDto.setUserId(3L);
+
+    // when
+    Mockito.when(userRepository.findById(3L)).thenReturn(Optional.empty());
 
     // when & then
     assertThrows(UserDoesNotExistException.class, () -> taskMapper.toTaskEntity(taskDto));
@@ -107,15 +110,6 @@ class TaskMapperTest {
     assertEquals(taskEntity.getDeadline(), taskDtoMapped.getDeadline());
     assertEquals(taskEntity.getStartDate(), taskDtoMapped.getStartDate());
     assertEquals(taskEntity.getUser().getId(), taskDtoMapped.getUserId());
-  }
-
-  @Test
-  void shouldThrowUserExceptionWhenTaskEntityUserNull() {
-    // given
-    taskEntity.setUser(null);
-
-    // when & then
-    assertThrows(UserDoesNotExistException.class, () -> taskMapper.toTaskDto(taskEntity));
   }
 
   @Test

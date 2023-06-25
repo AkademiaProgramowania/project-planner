@@ -38,7 +38,9 @@ public class TaskMapper {
     taskEntity.setStatus(taskDto.getStatus());
     taskEntity.setDeadline(taskDto.getDeadline());
     taskEntity.setStartDate(taskDto.getStartDate());
-    taskEntity.setUser(getUser(taskDto.getUserId()));
+    if (taskDto.getUserId() != null) {
+      taskEntity.setUser(getUser(taskDto.getUserId()));
+    }
 
     return taskEntity;
   }
@@ -66,15 +68,14 @@ public class TaskMapper {
     taskDto.setStatus(taskEntity.getStatus());
     taskDto.setDeadline(taskEntity.getDeadline());
     taskDto.setStartDate(taskEntity.getStartDate());
-    taskDto.setUserId(getUserId(taskEntity));
+    if (taskEntity.getUser() != null) {
+      taskDto.setUserId(getUserId(taskEntity));
+    }
 
     return taskDto;
   }
 
   private Long getUserId(TaskEntity taskEntity) {
-    if (taskEntity.getUser() == null) {
-      throw new UserDoesNotExistException(ExceptionMessage.USER_DOES_NOT_EXIST.getExceptionText());
-    }
     return taskEntity.getUser().getId();
   }
 }
