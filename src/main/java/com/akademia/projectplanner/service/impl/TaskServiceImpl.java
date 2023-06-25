@@ -30,7 +30,7 @@ public class TaskServiceImpl implements TaskService {
   private TaskMapper taskMapper;
   private TaskRepository taskRepository;
   private UserRepository userRepository;
-  private UserMapper userMapper;
+  private static final String UNASSIGNED = "unassigned";
 
   public void addTask(TaskDto taskDto) {
     if (TaskValidator.hasBlankName(taskDto)) {
@@ -69,7 +69,7 @@ public class TaskServiceImpl implements TaskService {
       Long userId = taskDto.getUserId();
       String email;
       if (userId == null) {
-        email = "unassigned";
+        email = UNASSIGNED;
       } else {
         UserEntity userEntity =
             userRepository
