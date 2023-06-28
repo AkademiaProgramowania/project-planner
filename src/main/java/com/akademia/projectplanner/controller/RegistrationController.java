@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import javax.validation.groups.Default;
 
 /**
  * The RegistrationController handles requests related to user registration, such as displaying a
@@ -56,9 +57,6 @@ public class RegistrationController {
     }
     try {
       registrationService.register(userDto);
-    } catch (IllegalArgumentException i) {
-      model.addAttribute("fieldsNotFilledMessage", i.getMessage());
-      return "registration";
     } catch (AuthenticationException e) {
       model.addAttribute("registrationErrorMessage", e.getMessage());
       return "registration";

@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import javax.validation.groups.Default;
 
 /** A Data Transfer Object (DTO) for a User. */
 @Getter
 @Setter
 public class UserDto {
-
   private Long id;
 
   @NotBlank(message = "Field required")
@@ -21,7 +20,11 @@ public class UserDto {
   @Email(message = "Please enter a valid email address")
   @NotBlank(message = "Field required")
   private String email;
-  @NotBlank(message = "Field required")
+
+  @NotEmpty(message = "Field required")
+  @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+          message = "Password must be at least 8 characters long, include at least " +
+                  "one uppercase letter, one lowercase letter, one digit, and one special character")
   private String password;
   @NotBlank(message = "Field required")
   private String passwordRepeated;

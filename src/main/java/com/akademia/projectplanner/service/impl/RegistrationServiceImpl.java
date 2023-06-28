@@ -22,9 +22,6 @@ public class RegistrationServiceImpl implements RegistrationService {
   private UserMapper userMapper;
 
   public void register(UserDto userDto) {
-    if (RegistrationValidator.checkMandatoryFields(userDto)) {
-      throw new IllegalArgumentException(ExceptionMessage.FIELDS_NOT_FILLED.getExceptionText());
-    }
     if (userRepository.existsByEmail(userDto.getEmail())
         || !RegistrationValidator.checkPasswordCorrectness(userDto)) {
       throw new AuthenticationException(ExceptionMessage.FIELDS_NOT_CORRECT.getExceptionText());
