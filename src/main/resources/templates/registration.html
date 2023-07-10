@@ -22,24 +22,28 @@
                 <div>
                     <input th:field="${registrationDto.name}" id="name" class="input pointer">
                 </div>
+                <div class="error" th:if="${#fields.hasErrors('registrationDto.name')}" th:errors="${registrationDto.name}"></div>
             </div>
             <div class="field">
                 <label for="email" class="required">Email</label>
                 <div>
                     <input th:field="${registrationDto.email}" id="email" class="input pointer">
                 </div>
+                <div class="error" th:if="${#fields.hasErrors('registrationDto.email')}" th:errors="${registrationDto.email}"></div>
             </div>
             <div class="field">
                 <label for="password" class="required">Password</label>
                 <div>
                     <input th:field="${registrationDto.password}" type="password" id="password" class="input pointer">
                 </div>
+                <div class="error" th:if="${#fields.hasErrors('registrationDto.password')}" th:errors="${registrationDto.password}"></div>
             </div>
             <div class="field">
                 <label for="passwordRepeated" class="required">Repeat password</label>
                 <div>
                     <input th:field="${registrationDto.passwordRepeated}" type="password" id="passwordRepeated" class="input pointer">
                 </div>
+                <div class="error" th:if="${#fields.hasErrors('registrationDto.passwordRepeated')}" th:errors="${registrationDto.passwordRepeated}"></div>
             </div>
             <div class="submit-container">
                 <a href="/" class="cancel pointer">Cancel</a>

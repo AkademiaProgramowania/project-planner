@@ -6,9 +6,13 @@ import com.akademia.projectplanner.exception.AuthenticationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
+import javax.validation.groups.Default;
 
 /**
  * The RegistrationController handles requests related to user registration, such as displaying a
@@ -46,12 +50,13 @@ public class RegistrationController {
    *     case of errors, or a redirect to the login page in case of success
    */
   @PostMapping("/registration")
-  public String register(@ModelAttribute("registrationDto") UserDto userDto, Model model) {
+  public String register(@ModelAttribute("registrationDto") @Valid UserDto userDto, BindingResult bindingResult, Model model) {
+    if(bindingResult.hasErrors())
+    {
+      return "registration";
+    }
     try {
       registrationService.register(userDto);
-    } catch (IllegalArgumentException i) {
-      model.addAttribute("fieldsNotFilledMessage", i.getMessage());
-      return "registration";
     } catch (AuthenticationException e) {
       model.addAttribute("registrationErrorMessage", e.getMessage());
       return "registration";
