@@ -1,5 +1,6 @@
 package com.akademia.projectplanner.dto;
 
+import com.akademia.projectplanner.constants.ConstantClass;
 import com.akademia.projectplanner.enums.Role;
 import lombok.Getter;
 import lombok.NonNull;
@@ -15,18 +16,17 @@ import javax.validation.groups.Default;
 public class UserDto {
   private Long id;
 
-  @NotBlank(message = "Field required")
+  @NotBlank(message = ConstantClass.UserMessages.FIELD_REQUIRED)
   private String name;
-  @Email(message = "Please enter a valid email address")
-  @NotBlank(message = "Field required")
+  @Email(message = ConstantClass.UserMessages.VALID_EMAIL)
+  @NotBlank(message = ConstantClass.UserMessages.FIELD_REQUIRED)
   private String email;
 
-  @NotEmpty(message = "Field required")
+  @NotEmpty(message = ConstantClass.UserMessages.FIELD_REQUIRED)
   @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-          message = "Password must be at least 8 characters long, include at least " +
-                  "one uppercase letter, one lowercase letter, one digit, and one special character")
+          message = ConstantClass.UserMessages.PASSWORD_RESTRICTIONS)
   private String password;
-  @NotBlank(message = "Field required")
+  @NotBlank(message = ConstantClass.UserMessages.FIELD_REQUIRED)
   private String passwordRepeated;
   private Role role;
 }
