@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import javax.validation.groups.Default;
+import java.util.List;
 
 /** A Data Transfer Object (DTO) for a User. */
 @Getter
@@ -33,4 +34,5 @@ public class UserDto {
   private String passwordRepeated;
 
   private Role role;
+  private List<TaskDto> tasks;
 }
