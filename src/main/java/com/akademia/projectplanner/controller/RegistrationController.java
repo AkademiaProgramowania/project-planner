@@ -50,9 +50,11 @@ public class RegistrationController {
    *     case of errors, or a redirect to the login page in case of success
    */
   @PostMapping("/registration")
-  public String register(@ModelAttribute("registrationDto") @Valid UserDto userDto, BindingResult bindingResult, Model model) {
-    if(bindingResult.hasErrors())
-    {
+  public String register(
+      @ModelAttribute("registrationDto") @Valid UserDto userDto,
+      BindingResult bindingResult,
+      Model model) {
+    if (bindingResult.hasErrors()) {
       return "registration";
     }
     try {
