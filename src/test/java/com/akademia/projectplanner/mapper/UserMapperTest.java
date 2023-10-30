@@ -5,10 +5,8 @@ import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.entity.TaskEntity;
 import com.akademia.projectplanner.entity.UserEntity;
 import com.akademia.projectplanner.enums.Role;
-import com.akademia.projectplanner.exception.TaskDoesNotExistException;
 import com.akademia.projectplanner.exception.UserDoesNotExistException;
 import com.akademia.projectplanner.repository.UserRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -61,7 +59,7 @@ class UserMapperTest {
   }
 
   @Test
-  void shouldThrowExceptionForNullUserDto() {
+  void shouldThrowExceptionForNullUserDto() throws UserDoesNotExistException {
     // when & then
     assertThrows(UserDoesNotExistException.class, () -> userMapper.toUserEntity(null));
   }
@@ -90,7 +88,7 @@ class UserMapperTest {
   }
 
   @Test
-  void shouldThrowExceptionForNullUserEntity() {
+  void shouldThrowExceptionForNullUserEntity() throws UserDoesNotExistException {
     // when & then
     assertThrows(UserDoesNotExistException.class, () -> userMapper.toUserDto(null));
   }

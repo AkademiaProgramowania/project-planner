@@ -3,7 +3,6 @@ package com.akademia.projectplanner.service.impl;
 import com.akademia.projectplanner.dto.UserDto;
 import com.akademia.projectplanner.entity.UserEntity;
 import com.akademia.projectplanner.exception.AuthenticationException;
-import com.akademia.projectplanner.mapper.TaskMapper;
 import com.akademia.projectplanner.mapper.UserMapper;
 import com.akademia.projectplanner.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +14,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -26,7 +23,6 @@ class RegistrationServiceImplTest {
 
   @Mock private UserRepository userRepository;
   @Mock private UserMapper userMapper;
-  @InjectMocks private TaskMapper taskMapper;
   @InjectMocks private RegistrationServiceImpl registrationService;
   private AutoCloseable autoCloseable;
   private UserDto userDto;
@@ -34,12 +30,7 @@ class RegistrationServiceImplTest {
   @BeforeEach
   void setUp() {
     autoCloseable = MockitoAnnotations.openMocks(this);
-    userDto = new UserDto();
-    userDto.setId(1L);
-    userDto.setEmail("email");
-    userDto.setName("name");
-    userDto.setPassword("pass");
-    userDto.setPasswordRepeated("pass");
+    userDto = buildUserDto();
   }
 
   @Test
@@ -56,7 +47,7 @@ class RegistrationServiceImplTest {
   }
 
   @Test
-  void shouldThrowAuthenticationExceptionWhenEmailExists() {
+  void shouldThrowAuthenticationExceptionWhenEmailExists() throws AuthenticationException {
     // given
     UserEntity userEntity = new UserEntity();
     Mockito.when(userRepository.existsByEmail(userDto.getEmail())).thenReturn(true);
@@ -67,7 +58,7 @@ class RegistrationServiceImplTest {
   }
 
   @Test
-  void shouldThrowAuthenticationExceptionWhenPasswordNotEqual() {
+  void shouldThrowAuthenticationExceptionWhenPasswordNotEqual() throws AuthenticationException {
     // given
     userDto.setPassword("pass");
     userDto.setPasswordRepeated("password");
@@ -96,5 +87,15 @@ class RegistrationServiceImplTest {
     // Then
     assertNotNull(result);
     assertEquals(userEntities.size(), result.size());
+  }
+
+  private UserDto buildUserDto() {
+    return new UserDtoBuilder()
+        .setId(1L)
+        .setEmail("email")
+        .setName("name")
+        .setPassword("pass")
+        .setPasswordRepeated("pass")
+        .build();
   }
 }

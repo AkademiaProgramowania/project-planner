@@ -71,7 +71,7 @@ class TaskMapperTest {
   }
 
   @Test
-  void shouldThrowUserExceptionWhenTaskDtoUserIdNotFound() {
+  void shouldThrowUserExceptionWhenTaskDtoUserIdNotFound() throws UserDoesNotExistException {
     // given
     taskDto.setUserId(3L);
 
@@ -83,7 +83,7 @@ class TaskMapperTest {
   }
 
   @Test
-  void shouldThrowExceptionForNullTaskDto() {
+  void shouldThrowExceptionForNullTaskDto() throws TaskDoesNotExistException {
     // when & then
     assertThrows(TaskDoesNotExistException.class, () -> taskMapper.toTaskEntity(null));
   }
@@ -113,7 +113,7 @@ class TaskMapperTest {
   }
 
   @Test
-  void shouldThrowExceptionForNullTaskEntity() {
+  void shouldThrowExceptionForNullTaskEntity() throws TaskDoesNotExistException {
     // when & then
     assertThrows(TaskDoesNotExistException.class, () -> taskMapper.toTaskDto(null));
   }
