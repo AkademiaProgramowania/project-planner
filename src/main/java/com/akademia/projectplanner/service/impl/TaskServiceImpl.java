@@ -2,7 +2,6 @@ package com.akademia.projectplanner.service.impl;
 
 import com.akademia.projectplanner.entity.UserEntity;
 import com.akademia.projectplanner.exception.UserDoesNotExistException;
-import com.akademia.projectplanner.mapper.UserMapper;
 import com.akademia.projectplanner.repository.UserRepository;
 
 import com.akademia.projectplanner.enums.ExceptionMessage;

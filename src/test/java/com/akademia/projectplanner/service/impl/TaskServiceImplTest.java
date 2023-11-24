@@ -3,9 +3,11 @@ package com.akademia.projectplanner.service.impl;
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.entity.TaskEntity;
 import com.akademia.projectplanner.enums.Status;
+import com.akademia.projectplanner.exception.TaskDoesNotExistException;
 import com.akademia.projectplanner.mapper.TaskMapper;
 import com.akademia.projectplanner.repository.TaskRepository;
 import com.akademia.projectplanner.repository.UserRepository;
+import org.hibernate.mapping.Any;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,10 +19,10 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class TaskServiceImplTest {
   @Mock private TaskMapper taskMapper;
@@ -80,16 +82,42 @@ class TaskServiceImplTest {
     Mockito.when(taskRepository.findAll()).thenReturn(taskEntities);
     Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
 
-    // When
+    // when
     List<TaskDto> taskDtos = taskService.getAllTasks();
 
-    // Then
+    // then
     assertNotNull(taskDtos);
     assertEquals(taskEntities.size(), taskDtos.size());
   }
 
   @Test
-  void getTaskInfo() {}
+  void shouldGetTaskInfoSuccessfully() {
+    // given
+    TaskEntity taskEntity = new TaskEntity();
+
+    Mockito.when(taskRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(taskEntity));
+    Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
+
+    // when
+    TaskDto task = taskService.getTaskInfo(1L);
+
+    //then
+    verify(taskRepository, times(1)).findById(1L);
+    assertNotNull(task);
+
+  }
+
+  @Test
+  void shouldThrowTaskDoesNotExistExceptionWhenTaskNotInRepository() throws TaskDoesNotExistException {
+    // given
+    Long taskId = 1L;
+    Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
+
+    // when & then
+    assertThrows(TaskDoesNotExistException.class, () -> taskService.getTaskInfo(taskId));
+    verify(taskMapper, never()).toTaskDto(any());
+
+  }
 
   @Test
   void createTasksEmailsMap() {}
