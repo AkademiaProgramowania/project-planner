@@ -3,7 +3,6 @@ package com.akademia.projectplanner.service.impl;
 import com.akademia.projectplanner.dto.TaskDto;
 import com.akademia.projectplanner.entity.TaskEntity;
 import com.akademia.projectplanner.enums.Status;
-import com.akademia.projectplanner.exception.AuthenticationException;
 import com.akademia.projectplanner.mapper.TaskMapper;
 import com.akademia.projectplanner.repository.TaskRepository;
 import com.akademia.projectplanner.repository.UserRepository;
@@ -16,8 +15,10 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -71,7 +72,21 @@ class TaskServiceImplTest {
   }
 
   @Test
-  void getAllTasks() {}
+  void getAllTasks() {
+    // given
+    List<TaskEntity> taskEntities = new ArrayList<>();
+    taskEntities.add(new TaskEntity());
+
+    Mockito.when(taskRepository.findAll()).thenReturn(taskEntities);
+    Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
+
+    // When
+    List<TaskDto> taskDtos = taskService.getAllTasks();
+
+    // Then
+    assertNotNull(taskDtos);
+    assertEquals(taskEntities.size(), taskDtos.size());
+  }
 
   @Test
   void getTaskInfo() {}
