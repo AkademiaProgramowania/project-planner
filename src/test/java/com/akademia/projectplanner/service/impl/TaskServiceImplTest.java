@@ -27,136 +27,141 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class TaskServiceImplTest {
-  @Mock private TaskMapper taskMapper;
-  @Mock private TaskRepository taskRepository;
-  @Mock private UserRepository userRepository;
-  @InjectMocks TaskServiceImpl taskService;
-  private TaskDto taskDto;
-  private AutoCloseable autoCloseable;
+    @Mock
+    private TaskMapper taskMapper;
+    @Mock
+    private TaskRepository taskRepository;
+    @Mock
+    private UserRepository userRepository;
+    @InjectMocks
+    TaskServiceImpl taskService;
+    private TaskDto taskDto;
 
-  @BeforeEach
-  void setUp() {
-    autoCloseable = MockitoAnnotations.openMocks(this);
-    taskDto = buildTaskDto();
-  }
 
-  @Test
-  void shouldAddTaskSuccessfully() {
-    // given
-    TaskEntity taskEntity = new TaskEntity();
-    Mockito.when(taskMapper.toTaskEntity(taskDto)).thenReturn(taskEntity);
-    // when
-    taskService.addTask(taskDto);
-    // then
-    verify(taskRepository, times(1)).save(taskEntity);
-  }
+    @BeforeEach
+    void setUp() {
+        AutoCloseable autoCloseable = MockitoAnnotations.openMocks(this);
+        taskDto = buildTaskDto();
+    }
 
-  @Test
-  void shouldThrowIllegalArgumentExceptionWhenTaskWithBlankName() throws IllegalArgumentException {
-    // given
-    taskDto.setName("");
-    TaskEntity taskEntity = new TaskEntity();
-    Mockito.when(taskMapper.toTaskEntity(taskDto)).thenReturn(taskEntity);
+    @Test
+    void shouldAddTaskSuccessfully() {
+        // given
+        TaskEntity taskEntity = new TaskEntity();
+        Mockito.when(taskMapper.toTaskEntity(taskDto)).thenReturn(taskEntity);
+        // when
+        taskService.addTask(taskDto);
+        // then
+        verify(taskRepository, times(1)).save(taskEntity);
+    }
 
-    // when & then
-    assertThrows(IllegalArgumentException.class, () -> taskService.addTask(taskDto));
-  }
+    @Test
+    void shouldThrowIllegalArgumentExceptionWhenTaskWithBlankName() throws IllegalArgumentException {
+        // given
+        taskDto.setName("");
+        TaskEntity taskEntity = new TaskEntity();
+        Mockito.when(taskMapper.toTaskEntity(taskDto)).thenReturn(taskEntity);
 
-  @Test
-  void shouldThrowDateTimeExceptionWhenTaskWithInvalidDate() throws DateTimeException {
-    // given
-    LocalDate today = LocalDate.now();
-    LocalDate yesterday = today.minusDays(1);
-    taskDto.setDeadline(yesterday.toString());
-    TaskEntity taskEntity = new TaskEntity();
-    Mockito.when(taskMapper.toTaskEntity(taskDto)).thenReturn(taskEntity);
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> taskService.addTask(taskDto));
+    }
 
-    // when & then
-    assertThrows(DateTimeException.class, () -> taskService.addTask(taskDto));
-  }
+    @Test
+    void shouldThrowDateTimeExceptionWhenTaskWithInvalidDate() throws DateTimeException {
+        // given
+        LocalDate today = LocalDate.now();
+        LocalDate yesterday = today.minusDays(1);
+        taskDto.setDeadline(yesterday.toString());
+        TaskEntity taskEntity = new TaskEntity();
+        Mockito.when(taskMapper.toTaskEntity(taskDto)).thenReturn(taskEntity);
 
-  @Test
-  void getAllTasks() {
-    // given
-    List<TaskEntity> taskEntities = new ArrayList<>();
-    taskEntities.add(new TaskEntity());
+        // when & then
+        assertThrows(DateTimeException.class, () -> taskService.addTask(taskDto));
+    }
 
-    Mockito.when(taskRepository.findAll()).thenReturn(taskEntities);
-    Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
+    @Test
+    void getAllTasks() {
+        // given
+        List<TaskEntity> taskEntities = new ArrayList<>();
+        taskEntities.add(new TaskEntity());
 
-    // when
-    List<TaskDto> taskDtos = taskService.getAllTasks();
+        Mockito.when(taskRepository.findAll()).thenReturn(taskEntities);
+        Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
 
-    // then
-    assertNotNull(taskDtos);
-    assertEquals(taskEntities.size(), taskDtos.size());
-  }
+        // when
+        List<TaskDto> taskDtos = taskService.getAllTasks();
 
-  @Test
-  void shouldGetTaskInfoSuccessfully() {
-    // given
-    TaskEntity taskEntity = new TaskEntity();
+        // then
+        assertNotNull(taskDtos);
+        assertEquals(taskEntities.size(), taskDtos.size());
+    }
 
-    Mockito.when(taskRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(taskEntity));
-    Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
+    @Test
+    void shouldGetTaskInfoSuccessfully() {
+        // given
+        TaskEntity taskEntity = new TaskEntity();
 
-    // when
-    TaskDto task = taskService.getTaskInfo(1L);
+        Mockito.when(taskRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(taskEntity));
+        Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
 
-    // then
-    verify(taskRepository, times(1)).findById(1L);
-    assertNotNull(task);
-  }
+        // when
+        TaskDto task = taskService.getTaskInfo(1L);
 
-  @Test
-  void shouldThrowTaskDoesNotExistExceptionWhenTaskNotInRepository()
-      throws TaskDoesNotExistException {
-    // given
-    Long taskId = 1L;
-    Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
+        // then
+        verify(taskRepository, times(1)).findById(1L);
+        assertNotNull(task);
+    }
 
-    // when & then
-    assertThrows(TaskDoesNotExistException.class, () -> taskService.getTaskInfo(taskId));
-    verify(taskMapper, never()).toTaskDto(any());
-  }
+    @Test
+    void shouldThrowTaskDoesNotExistExceptionWhenTaskNotInRepository() throws TaskDoesNotExistException {
+        // given
+        Long taskId = 1L;
+        Mockito.when(taskMapper.toTaskDto(Mockito.any(TaskEntity.class))).thenReturn(taskDto);
 
-  @Test
-  void shouldCreateTaskEmailsMapSuccessfully() {
-    // given
-    List<TaskDto> taskList = new ArrayList<>();
-    UserEntity userEntity = new UserEntity();
-    userEntity.setEmail("Email");
-    taskList.add(taskDto);
-    Mockito.when(userRepository.findById(anyLong())).thenReturn(Optional.of(userEntity));
+        // when & then
+        assertThrows(TaskDoesNotExistException.class, () -> taskService.getTaskInfo(taskId));
+        verify(taskMapper, never()).toTaskDto(any());
+    }
 
-    // when
-    Map<TaskDto, String> tasksEmailsMap = taskService.createTasksEmailsMap(taskList);
+    @Test
+    void shouldCreateTaskEmailsMapSuccessfully() {
+        // given
+        String email = "Email";
+        List<TaskDto> taskList = new ArrayList<>();
+        UserEntity userEntity = new UserEntity();
+        userEntity.setEmail(email);
+        taskList.add(taskDto);
+        Mockito.when(userRepository.findById(anyLong())).thenReturn(Optional.of(userEntity));
 
-    // then
-    assertNotNull(tasksEmailsMap);
-    assertEquals(1, tasksEmailsMap.size());
-    assertEquals("Email", tasksEmailsMap.get(taskDto));
-  }
+        // when
+        Map<TaskDto, String> tasksEmailsMap = taskService.createTasksEmailsMap(taskList);
 
-  @Test
-  void shouldThrowUserDoesNotExistException() {
-    // given
-    List<TaskDto> taskList = new ArrayList<>();
-    taskList.add(taskDto);
+        // then
+        assertNotNull(tasksEmailsMap);
+        assertEquals(1, tasksEmailsMap.size());
+        assertEquals(email, tasksEmailsMap.get(taskDto));
+    }
 
-    // when & then
-    assertThrows(UserDoesNotExistException.class, () -> taskService.createTasksEmailsMap(taskList));
-  }
+    @Test
+    void shouldThrowUserDoesNotExistException() throws UserDoesNotExistException {
+        // given
+        List<TaskDto> taskList = new ArrayList<>();
+        taskList.add(taskDto);
 
-  private TaskDto buildTaskDto() {
-    return new TaskDtoBuilder()
-        .setId(1L)
-        .setName("Name")
-        .setStatus(Status.DONE)
-        .setDescription("Description")
-        .setDeadline("")
-        .setStartDate(LocalDate.now())
-        .setUserId(2L)
-        .build();
-  }
+        // when & then
+        assertThrows(UserDoesNotExistException.class, () -> taskService.createTasksEmailsMap(taskList));
+    }
+
+    private TaskDto buildTaskDto() {
+        return new TaskDtoBuilder()
+                .setId(1L)
+                .setName("Name")
+                .setStatus(Status.DONE)
+                .setDescription("Description")
+                .setDeadline("")
+                .setStartDate(LocalDate.now())
+                .setUserId(2L)
+                .build();
+    }
+
 }
